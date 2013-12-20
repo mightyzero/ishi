@@ -1,0 +1,39 @@
+# Common build products
+build
+
+# Visual Studio solution files
+*.opensdf
+*.sdf
+*.sln
+*.suo
+*.vcxproj
+*.vcxproj.filters
+
+# Visual Studio build products
+*.dir
+Debug
+Win32
+*.ilk
+*.pdb
+
+# KDevelop project files
+*.kdev4
+.kdev_include_paths
+
+# CMake temporary files
+CMakeFiles
+CMakeCache.txt
+
+# CMake generator files
+Makefile
+
+# CMake install script
+cmake_install.cmake
+
+# Temporary files
+*.DS_Store
+*~
+*#
+
+# Code coverage result files
+*.gcov
