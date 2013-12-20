@@ -22,9 +22,9 @@ set(SRC_MAIN
 #---------------------------------------------------------------------------#
 # List build targets                                                        #
 #---------------------------------------------------------------------------#
-add_executable(ArclightVS ${SRC_MAIN})
+add_executable(nFlux ${SRC_MAIN})
 
 #---------------------------------------------------------------------------#
 # Link with libraries                                                       #
 #---------------------------------------------------------------------------#
-target_link_libraries(ArclightVS sfml-window)
+target_link_libraries(nFlux sfml-window)

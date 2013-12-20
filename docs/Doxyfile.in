@@ -3,9 +3,9 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = "ArclightVS"
+PROJECT_NAME           = "nFlux"
 PROJECT_NUMBER         = 
-@ArclightVS_VERSION_MAJOR@.@ArclightVS_VERSION_MINOR@.@ArclightVS.VERSION_PATCH@
+@nFlux_VERSION_MAJOR@.@nFlux_VERSION_MINOR@.@nFlux.VERSION_PATCH@
 PROJECT_BRIEF          =
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = @DOCS_OUTPUT_DIRECTORY@
