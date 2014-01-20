@@ -9,7 +9,7 @@
 #include <core/Common.h>
 
 /*=============================================================================+
- | Class Forward Declarations 1
+ | Class Forward Declarations
  +============================================================================*/
 template<typename T, uint32_t R, uint32_t C> 
 class Matrix;
@@ -127,7 +127,7 @@ public:
 	* \relates class Matrix
 	* \brief Overload of the == operator
 	* 
-	* This operator compares too matrices and check if they are equal.
+	* Return true if the two operand matrices are equal.
 	* 
 	* \param mat1 The first matrix
 	* \param mat2 The second matrix
@@ -140,7 +140,7 @@ public:
 	* \relates class Matrix
 	* \brief Overload of the != operator
 	* 
-	* This operator compares too matrices and check if they are unequal.
+	* Return true if the two operand matrices are NOT equal.
 	* 
 	* \param mat1 The first matrix
 	* \param mat2 The second matrix
@@ -153,7 +153,7 @@ public:
 	* \relates class Matrix
 	* \brief Overload of the + operator
 	* 
-	* This operator adds two matrices element-wise and return the result.
+	* Add two matrices element-wise and return the result.
 	* 
 	* \param mat1 The first matrix
 	* \param mat2 The second matrix
@@ -167,8 +167,8 @@ public:
 	* \relates class Matrix
 	* \brief Overload of the - operator
 	* 
-	* This operator subtracts the second matrix from the first matrix 
-	* element-wise and return the result.
+	* Subtract the second matrix from the first matrix element-wise and 
+	* return the result.
 	* 
 	* \param mat1 The first matrix
 	* \param mat2 The second matrix
