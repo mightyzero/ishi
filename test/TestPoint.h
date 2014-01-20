@@ -48,27 +48,27 @@ TEST(Point, Equality) {
   ASSERT_TRUE((p == Point<float, 3>(4, 5, 6)));
   ASSERT_TRUE((Point<float, 3>(4, 5, 6) == Point<float, 3>(4, 5, 6)));
 }
-// 
-// TEST(Point, PointPointAddition) {
-//   Point<float, 3> p1, p2, p;
-// 
-//   p1 = Point<float, 3>(1, 2, 3);
-//   p2 = Point<float, 3>(4, 5, 6);
-// 
-//   // Check addition identity
-//   p = p1 + Point<float, 3>(0, 0, 0);
-//   ASSERT_TRUE((p == Point<float, 3>(1, 2, 3)));
-// 
-//   p = p2 + Point<float, 3>(0, 0, 0);
-//   ASSERT_TRUE((p == Point<float, 3>(4, 5, 6)));
-// 
-//   // Check result of addition
-//   p = p1 + p2;
-//   ASSERT_TRUE((p == Point<float, 3>(5, 7, 9)));
-// 
-//   // Check addition is commutative
-//   ASSERT_TRUE(((p1 + p2) == (p2 + p1)));
-// }
+ 
+TEST(Point, PointPointAddition) {
+  Point<float, 3> p1, p2, p;
+
+  p1 = Point<float, 3>(1, 2, 3);
+  p2 = Point<float, 3>(4, 5, 6);
+
+  // Check addition identity
+  p = p1 + Point<float, 3>(0, 0, 0);
+  ASSERT_TRUE((p == Point<float, 3>(1, 2, 3)));
+
+  p = p2 + Point<float, 3>(0, 0, 0);
+  ASSERT_TRUE((p == Point<float, 3>(4, 5, 6)));
+
+  // Check result of addition
+  p = p1 + p2;
+  ASSERT_TRUE((p == Point<float, 3>(5, 7, 9)));
+
+  // Check addition is commutative
+  ASSERT_TRUE(((p1 + p2) == (p2 + p1)));
+}
 // 
 // TEST(Point, IndexAccessor) {
 //   Point<float, 3> p;
