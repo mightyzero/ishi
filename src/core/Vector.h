@@ -19,7 +19,8 @@ Vector<T,D> operator+(const Vector<T,D>& v1, const Vector<T,D>& v2);
 
 /// \brief Scale a vector by a scalar and return the result.
 template <typename T, uint32_t D, typename T2,
-          typename std::enable_if<std::is_integral<T2>::value,int>::type = 0>
+          Where<std::is_integral<T2>>>
+          // typename std::enable_if<std::is_integral<T2>::value,int>::type = 0>
 Vector<T,D> operator*(const Vector<T,D>& vec, const T2& factor);
 
 /// \brief Scale a vector by a scalar and return the result.

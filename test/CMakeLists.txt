@@ -13,8 +13,6 @@ set(INCLUDE_DIRS
 	${INCLUDE_DIRS}
 	${TEST_ROOT}
 	${TEST_ROOT}/lib/gtest/include
-	${INC_ROOT}
-	${LIB_ROOT}/blitz
 )
 include_directories(${INCLUDE_DIRS})
 
@@ -22,9 +20,10 @@ include_directories(${INCLUDE_DIRS})
 # List executables                                                             #
 #------------------------------------------------------------------------------#
 add_executable(TestAll
-	${TEST_ROOT}/TestAll.cpp
 	${INC_ROOT}/core/Matrix.h
 	${INC_ROOT}/core/Point.h
+	${TEST_ROOT}/TestPoint.h
+	${TEST_ROOT}/TestAll.cpp
 )
 
 #------------------------------------------------------------------------------#

@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <TestCommon.h>
 #include <TestMatrix.h>
 #include <TestPoint.h>
 

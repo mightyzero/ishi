@@ -12,9 +12,8 @@ include_directories(${INCLUDE_DIRS})
 #---------------------------------------------------------------------------#
 set(SRC_CORE
 	${SRC_ROOT}/core/Point.h
-	${SRC_ROOT}/core/Vector.h
 	${SRC_ROOT}/core/Matrix.h
-	${SRC_ROOT}/core/Matrix.cpp
+	${SRC_ROOT}/core/Vector.h
 )
 
 set(SRC_MAIN

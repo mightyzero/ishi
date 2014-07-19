@@ -69,7 +69,7 @@ set(TEST_ROOT ${PROJECT_SOURCE_DIR}/test)
 # List header file directories                                                 #
 #------------------------------------------------------------------------------#
 set(INCLUDE_DIRS
-	${SRC_ROOT}
+	${INC_ROOT}
 	${LIB_ROOT}/SFML/include
 	${LIB_ROOT}/blitz
 )
