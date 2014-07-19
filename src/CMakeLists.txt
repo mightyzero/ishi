@@ -29,4 +29,7 @@ add_executable(nFlux ${SRC_MAIN})
 #---------------------------------------------------------------------------#
 # Link with libraries                                                       #
 #---------------------------------------------------------------------------#
-target_link_libraries(nFlux sfml-window)
+target_link_libraries(nFlux
+	sfml-window
+	tga
+)

@@ -72,6 +72,7 @@ set(INCLUDE_DIRS
 	${INC_ROOT}
 	${LIB_ROOT}/SFML/include
 	${LIB_ROOT}/blitz
+	${LIB_ROOT}/libtga/src
 )
 
 #------------------------------------------------------------------------------#
@@ -80,7 +81,7 @@ set(INCLUDE_DIRS
 # set(BUILD_SHARED_LIBS False)
 add_subdirectory(${LIB_ROOT}/SFML)
 add_subdirectory(${LIB_ROOT}/GLEW)
-add_subdirectory(${LIB_ROOT}/blitz)
+add_subdirectory(${LIB_ROOT}/libtga)
 add_subdirectory(${SRC_ROOT})
 add_subdirectory(${TEST_ROOT})
 add_subdirectory(${PROJECT_SOURCE_DIR}/docs)
