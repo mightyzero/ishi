@@ -1,5 +1,5 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef NF_VECTOR_H
+#define NF_VECTOR_H
 
 #include <core/Common.h>
 #include <blitz/array.h>
@@ -98,5 +98,10 @@ public:
 	>
 	Vector& operator/=(const T2& factor);
 };
- 
-#endif 	// VECTOR_H
+
+// Include implementation of Vector template class
+// Note: The implementation must be in the header file. This is a requirement
+//       for all template classes
+#include <core/VectorImpl.cpp>
+
+#endif 	// NF_VECTOR_H
