@@ -1,3 +1,8 @@
+#===============================================================================
+# Project    : nFlux
+# File       : test/CMakeLists.txt
+# Description: CMake file for building unit test executables 
+#===============================================================================
 set(GCC_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
 set(GCC_COVERAGE_LINK_FLAGS "-lgcov")
 

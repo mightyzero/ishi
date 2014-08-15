@@ -64,6 +64,7 @@ set(INC_ROOT ${PROJECT_SOURCE_DIR}/src)
 set(SRC_ROOT ${PROJECT_SOURCE_DIR}/src)
 set(LIB_ROOT ${PROJECT_SOURCE_DIR}/lib)
 set(TEST_ROOT ${PROJECT_SOURCE_DIR}/test)
+set(DEMO_ROOT ${PROJECT_SOURCE_DIR}/demos)
 
 #------------------------------------------------------------------------------#
 # List header file directories                                                 #
@@ -84,4 +85,5 @@ add_subdirectory(${LIB_ROOT}/GLEW)
 add_subdirectory(${LIB_ROOT}/libtga)
 add_subdirectory(${SRC_ROOT})
 add_subdirectory(${TEST_ROOT})
+add_subdirectory(${DEMO_ROOT})
 add_subdirectory(${PROJECT_SOURCE_DIR}/docs)

@@ -3,6 +3,13 @@
 
 #include <stdint.h>  // *int*_t
 
+#include <SFML/Graphics/Color.hpp>    // sf::Color
+#include <SFML/Graphics/Image.hpp>    // sf::Image
+
+// Import SFML types into nFlux for convenience
+typedef sf::Color Color;
+typedef sf::Image Image;
+
 /**
 Template utility to test type equality.
 Scope member value is 1 if types are equal, 0 if not.
@@ -11,12 +18,14 @@ Usage examples:
 TypeEqual<T, int>
 */
 template<typename T1, typename T2>
-struct TypeEqual {
+struct TypeEqual
+{
 	enum { value = 0 };
 };
 
 template<typename T>
-struct TypeEqual<T, T> {
+struct TypeEqual<T, T>
+{
 	enum { value = 1 };
 };
 

@@ -1,3 +1,8 @@
+#===============================================================================
+# Project    : nFlux
+# File       : src/CMakeLists.txt
+# Description: CMake file for building project libraries and executables
+#===============================================================================
 #---------------------------------------------------------------------------#
 # List include directories                                                  #
 #---------------------------------------------------------------------------#
@@ -16,9 +21,14 @@ set(SRC_CORE
 	${SRC_ROOT}/core/Vector.h
 )
 
+set(SRC_UTILITIES
+	${SRC_ROOT}/utilities/File.h
+)
+
 set(SRC_MAIN
-	${SRC_ROOT}/main.cpp
 	${SRC_CORE}
+	${SRC_UTILITIES}
+	${SRC_ROOT}/main.cpp
 )
 
 #---------------------------------------------------------------------------#

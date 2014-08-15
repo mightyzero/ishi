@@ -1,3 +1,8 @@
+#===============================================================================
+# Project    : nFlux
+# File       : docs/CMakeLists.txt
+# Description: CMake file for building documentation using Doxygen
+#===============================================================================
 # Add Doxygen target
 find_package(Doxygen)
 if (DOXYGEN_FOUND)
