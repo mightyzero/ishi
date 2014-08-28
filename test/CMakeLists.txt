@@ -7,14 +7,13 @@ set(GCC_COVERAGE_LINK_FLAGS "-lgcov")
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/gtest)
 
 #------------------------------------------------------------------------------#
-# List header file directories                                                 #
+# Include header file directories                                              # 
 #------------------------------------------------------------------------------#
-set(INCLUDE_DIRS
+include_directories(
 	${INC_ROOT}
 	${TEST_ROOT}
-	${LIB_GTEST_INCLUDE}
+	${TEST_ROOT}/lib/gtest/include
 )
-include_directories(${INCLUDE_DIRS})
 
 #------------------------------------------------------------------------------#
 # List executables                                                             #
