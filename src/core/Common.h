@@ -2,6 +2,9 @@
 #define NF_COMMON_H
 
 #include <stdint.h>  // *int*_t
+#include <assert.h>  // assert
+
+#define ASSERT assert
 
 /**
 Template utility to test type equality.
