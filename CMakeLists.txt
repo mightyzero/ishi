@@ -94,3 +94,9 @@ add_subdirectory(${TEST_ROOT})       # Build project test
 
 # Add Doxygen target
 add_subdirectory(${PROJECT_SOURCE_DIR}/docs)
+
+#------------------------------------------------------------------------------#
+# Add and run tests                                                            #
+#------------------------------------------------------------------------------#
+enable_testing()
+add_test(unittest TestAll)
