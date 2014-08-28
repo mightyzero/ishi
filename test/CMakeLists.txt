@@ -10,9 +10,9 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/gtest)
 # List header file directories                                                 #
 #------------------------------------------------------------------------------#
 set(INCLUDE_DIRS
-	${INCLUDE_DIRS}
+	${INC_ROOT}
 	${TEST_ROOT}
-	${TEST_ROOT}/lib/gtest/include
+	${LIB_GTEST_INCLUDE}
 )
 include_directories(${INCLUDE_DIRS})
 
