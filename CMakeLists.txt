@@ -60,10 +60,10 @@ endif (DO_COVERAGE)
 #------------------------------------------------------------------------------#
 # Save important directories                                                   #
 #------------------------------------------------------------------------------#
-set(INC_ROOT ${PROJECT_SOURCE_DIR}/src)
-set(SRC_ROOT ${PROJECT_SOURCE_DIR}/src)
-set(LIB_ROOT ${PROJECT_SOURCE_DIR}/lib)
-set(TEST_ROOT ${PROJECT_SOURCE_DIR}/test)
+set(INC_ROOT ${CMAKE_SOURCE_DIR}/src)
+set(SRC_ROOT ${CMAKE_SOURCE_DIR}/src)
+set(LIB_ROOT ${CMAKE_SOURCE_DIR}/lib)
+set(TEST_ROOT ${CMAKE_SOURCE_DIR}/test)
 
 #------------------------------------------------------------------------------#
 # List header file directories                                                 #
@@ -71,7 +71,6 @@ set(TEST_ROOT ${PROJECT_SOURCE_DIR}/test)
 set(INCLUDE_DIRS
 	${INC_ROOT}
 	${LIB_ROOT}/SFML/include
-	${LIB_ROOT}/blitz
 	${LIB_ROOT}/libtga/src
 )
 
