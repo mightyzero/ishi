@@ -2,7 +2,6 @@
 #define NF_POINT_H
 
 #include <core/Common.h>
-#include <blitz/array.h>
 
 /**
 * Define the Point template class
@@ -31,7 +30,7 @@ bool operator!=(const Point<T,D>& p1, const Point<T,D>& p2);
 template <typename T, uint32_t D>
 class Point {
 private:
-	blitz::Array<T, 1> m_data;
+	// blitz::Array<T, 1> m_data;
 
 public:
 	// Constructors

@@ -1,3 +1,20 @@
+#==============================================================================#
+# Minh Pham - Copyright 2014 - All rights reserved.
+# 
+# Project: nFlux
+# Dependencies:
+# - SFML               | required by project
+# - GLEW               | required by project
+# - TGA library        | required by project
+# - Doxygen executable | optional by project
+# - OpenGL library     | required by SFML, GLEW
+# - GLU library        | required by GLEW
+# - JPEG library       | required by SFML
+# - OpenAL library     | required by SFML
+# - SNDFile library    | required by SFML
+# - Xrandr library     | required by SFML (UNIX systems)
+# - Freetype2 package  | required by SFML
+#==============================================================================#
 cmake_minimum_required(VERSION 2.8)
 
 set(DO_COVERAGE true)

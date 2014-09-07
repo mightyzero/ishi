@@ -4,8 +4,6 @@
 #include <iostream>
 #include <type_traits>  // enable_if
 
-#include <blitz/array.h>
-
 #include <core/Common.h>
 
 /*=============================================================================+
@@ -60,13 +58,13 @@ Matrix<T,R,C> operator*(const T2& factor, const Matrix<T,R,C>& mat);
 template<typename T, uint32_t R, uint32_t C> 
 class Matrix {
 private:
-	blitz::Array<T, 2> m_array;
+	T m_array[R][C];
 	
 public:
 	// Constructors
 	Matrix();
 	Matrix(const Matrix& other);
-	Matrix(const blitz::Array<T, 2>& array);
+	// Matrix(const blitz::Array<T, 2>& array);
 	
 	/***********************************************************************//**
 	 * \brief Destructor
@@ -75,9 +73,9 @@ public:
 	
 	// Assignment operators
 	Matrix& operator=(const Matrix& other);
-	Matrix& operator=(const blitz::Array<T, 2> array);	
-	blitz::ListInitializationSwitch<blitz::Array<T, 2>>
-	operator=(const T& scalar);
+	// Matrix& operator=(const blitz::Array<T, 2> array);	
+	// blitz::ListInitializationSwitch<blitz::Array<T, 2>>
+	// operator=(const T& scalar);
 
 	// Arithmetic operators
 	Matrix& operator+=(const Matrix& other);

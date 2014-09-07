@@ -1,5 +1,5 @@
-#ifndef TESTARRAY_H
-#define TESTARRAY_H
+#ifndef TEST_TESTARRAY_H
+#define TEST_TESTARRAY_H
 
 #include <gtest/gtest.h>
 #include <core/Array.h>
@@ -15,4 +15,4 @@ TEST(Array, AllocConstruction) {
 	Array<float, 3> array3(1, 2, 3);	
 }
 
-#endif  // TESTARRAY_H
+#endif  // TEST_TESTARRAY_H
