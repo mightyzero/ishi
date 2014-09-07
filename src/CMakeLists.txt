@@ -1,11 +1,11 @@
 #---------------------------------------------------------------------------#
 # List include directories                                                  #
 #---------------------------------------------------------------------------#
-set(INCLUDE_DIRS
-	${INCLUDE_DIRS}
-	${SRC_ROOT}/core
+include_directories(
+	${INC_ROOT}
+	${CORE_INCLUDE}
+	${LIB_SFML_INCLUDE}
 )
-include_directories(${INCLUDE_DIRS})
 
 #---------------------------------------------------------------------------#
 # List source files                                                         #

@@ -1,3 +1,20 @@
+#==============================================================================#
+# Minh Pham - Copyright 2014 - All rights reserved.
+# 
+# Project: nFlux
+# Dependencies:
+# - SFML               | required by project
+# - GLEW               | required by project
+# - TGA library        | required by project
+# - Doxygen executable | optional by project
+# - OpenGL library     | required by SFML, GLEW
+# - GLU library        | required by GLEW
+# - JPEG library       | required by SFML
+# - OpenAL library     | required by SFML
+# - SNDFile library    | required by SFML
+# - Xrandr library     | required by SFML (UNIX systems)
+# - Freetype2 package  | required by SFML
+#==============================================================================#
 cmake_minimum_required(VERSION 2.8)
 
 set(DO_COVERAGE true)
@@ -58,29 +75,39 @@ if (DO_COVERAGE)
 endif (DO_COVERAGE)
 
 #------------------------------------------------------------------------------#
-# Save important directories                                                   #
+# PATHS TO IMPORTANT DIRECTORIES                                               #
 #------------------------------------------------------------------------------#
-set(INC_ROOT ${CMAKE_SOURCE_DIR}/src)
-set(SRC_ROOT ${CMAKE_SOURCE_DIR}/src)
-set(LIB_ROOT ${CMAKE_SOURCE_DIR}/lib)
-set(TEST_ROOT ${CMAKE_SOURCE_DIR}/test)
+# Paths to project root directories
+set(INC_ROOT  ${PROJECT_SOURCE_DIR}/src)
+set(SRC_ROOT  ${PROJECT_SOURCE_DIR}/src)
+set(LIB_ROOT  ${PROJECT_SOURCE_DIR}/lib)
+set(TEST_ROOT ${PROJECT_SOURCE_DIR}/test)
 
-#------------------------------------------------------------------------------#
-# List header file directories                                                 #
-#------------------------------------------------------------------------------#
-set(INCLUDE_DIRS
-	${INC_ROOT}
-	${LIB_ROOT}/SFML/include
-	${LIB_ROOT}/libtga/src
-)
+# Paths to project include directories
+set(CORE_INCLUDE ${INC_ROOT}/core)
+
+# Paths to external libraries directories
+set(LIB_SFML_DIR ${LIB_ROOT}/SFML)
+set(LIB_GLEW_DIR ${LIB_ROOT}/GLEW)
+set(LIB_LTGA_DIR ${LIB_ROOT}/libtga)
+
+# Paths to external libraries include directories
+set(LIB_SFML_INCLUDE   ${LIB_ROOT}/SFML/include)
+set(LIB_LTGA_INCLUDE   ${LIB_ROOT}/libtga/src)
+set(LIB_GTEST_INCLUDE  ${TEST_ROOT}/lib/gtest/include)
 
 #------------------------------------------------------------------------------#
 # List subdirectories                                                          #
 #------------------------------------------------------------------------------#
 # set(BUILD_SHARED_LIBS False)
-add_subdirectory(${LIB_ROOT}/SFML)
-add_subdirectory(${LIB_ROOT}/GLEW)
-add_subdirectory(${LIB_ROOT}/libtga)
-add_subdirectory(${SRC_ROOT})
-add_subdirectory(${TEST_ROOT})
+# Build external libraries
+add_subdirectory(${LIB_SFML_DIR})    # Build SFML
+add_subdirectory(${LIB_GLEW_DIR})    # Build GLEW
+add_subdirectory(${LIB_LTGA_DIR})    # Build libTGA
+
+# Build project
+add_subdirectory(${SRC_ROOT})        # Build project source
+add_subdirectory(${TEST_ROOT})       # Build project test
+
+# Add Doxygen target
 add_subdirectory(${PROJECT_SOURCE_DIR}/docs)
