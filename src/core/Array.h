@@ -5,42 +5,41 @@
 
 #include <core/Arithmetics.h>
 
-/***************************************************************************//**
- * @brief Template class functioning as a data holder.
- * 
- *        StaticArray represents an array whose size is known at compile-time.
- *        StaticArray provides the following services:
- *        - Initialization with data, copying, destruction
- *        - Access elements with at()
- *        - Assignment to comma-separated list of value, for 1- and 2-dimension
- *          arrays (wishlist)
+/**
+ * @brief   Template class functioning as a data holder.
+ * @details Array is a multi-dimensional homogeneous data container whose size
+ *          is known at compile-time. It provides the following services:
+ *          - Single-allocation and single-deallocation of memory resources
+ *          - Data initialization, copy, transfer, and modification, for:
+ *            - The entire array
+ *            - A subset of the array
+ *            - Single data element
  *
- * @tparams	T Type of the elements
- ******************************************************************************/
+ * @tparam T Type of the elements
+ * @tparam s [description]
+ * @tparam sizes [description]
+ */
 template<typename T, uint32_t s, uint32_t... sizes>
 class Array {
 public:
 	static const uint32_t size;
 
-	// Default Constructor
+	/**
+	 * @brief   Default constructor
+	 * @details Allocate memory for the array. Data is NOT initialized.
+	 */
 	Array() {
 		printf("size is: %d\n", size);
 	}
 
+	/**
+	 * @brief   Construct and initialize the array with an initializer list
+	 * @details [long description]
+	 *
+	 * @param args [description]
+	 */
 	Array(std::initializer_list<T> args) {
 		printf("size is: %d\n", size);
-	}
-
-	// ListInitializer<Array, T, 0> operator=(T arg) {
-	// 	return ListInitializer<Array, T, 0>(*this, arg);
-	// }
-
-	T operator[](unsigned int index) const {
-
-	}
-
-	T& operator[](unsigned int index) {
-
 	}
 
 };
