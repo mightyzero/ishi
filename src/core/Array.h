@@ -1,42 +1,39 @@
 #ifndef CORE_ARRAY_H
 #define CORE_ARRAY_H
 
-#include <core/ListInitializer.h>
+#include <initializer_list>
 
-/*----------------------------------------------------------------------------+
-|  T. Class : 
-+----------------------------------------------------------------------------*/
-template<typename ElemT, typename SizeT>
-struct ArrayTrait
-{
-	typedef ElemT ElemType;
-	typedef SizeT Sizes;
-};
+#include <core/Arithmetics.h>
 
 /***************************************************************************//**
- * \brief Template class functioning as a data holder.
+ * @brief Template class functioning as a data holder.
  * 
  *        StaticArray represents an array whose size is known at compile-time.
  *        StaticArray provides the following services:
  *        - Initialization with data, copying, destruction
- *        - Index accessors
+ *        - Access elements with at()
  *        - Assignment to comma-separated list of value, for 1- and 2-dimension
  *          arrays (wishlist)
+ *
+ * @tparams	T Type of the elements
  ******************************************************************************/
-template<typename T, unsigned int nDims>
-class Array : Array<T, nDims-1> {
+template<typename T, uint32_t s, uint32_t... sizes>
+class Array {
 public:
-	typedef T ElemType;
+	static const uint32_t size;
 
 	// Default Constructor
 	Array() {
-		// TODO: Check signature
-		// TODO: Implement
+		printf("size is: %d\n", size);
 	}
 
-	ListInitializer<Array, T, 0> operator=(T arg) {
-		return ListInitializer<Array, T, 0>(*this, arg);
+	Array(std::initializer_list<T> args) {
+		printf("size is: %d\n", size);
 	}
+
+	// ListInitializer<Array, T, 0> operator=(T arg) {
+	// 	return ListInitializer<Array, T, 0>(*this, arg);
+	// }
 
 	T operator[](unsigned int index) const {
 
@@ -48,10 +45,7 @@ public:
 
 };
 
-template<typename T>
-class Array<T, 1> {
-
-};
-
+template<typename T, uint32_t s, uint32_t... sizes>
+const uint32_t Array<T, s, sizes...>::size = sizeof(T) * mult(s, sizes...);
 
 #endif  // CORE_ARRAY_H
