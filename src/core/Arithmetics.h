@@ -1,21 +1,31 @@
 #ifndef CORE_ARITHMETICS
 #define CORE_ARITHMETICS
 
-#define MULT_IDENTITY 1
+#include <core/Common.h>
 
 template<typename T>
-T mult() {
-	return MULT_IDENTITY;
-}
-
-template<typename T>
-T mult(T arg1) {
+constexpr T sum(T arg1) {
 	return arg1;
 }
 
 template<typename T, typename... Args>
-T mult(T arg1, Args... args) {
-	return arg1 * mult(args...);
+constexpr uint sum(T arg1, Args... args) {
+	return arg1 + sum(args...);
+}
+
+template<typename T>
+constexpr T product(T arg1) {
+	return arg1;
+}
+
+template<typename T, typename... Args>
+constexpr T product(T arg1, Args... args) {
+	return arg1 * product(args...);
+}
+
+template<typename T, typename... Args>
+uint count(T arg1, Args... args) {
+	return 1 + sizeof...(Args);
 }
 
 #endif  // CORE_ARITHMETICS
