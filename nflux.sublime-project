@@ -8,12 +8,18 @@
 		[{
 			"name": "Run Tests",
 			"cmd" : [ "build/TestAll" ]
-		}]
+		},
+		{
+			"name" : "Generate Build Files with CMake",
+			"shell": true,
+			"cmd"  : ["rm --recursive --force build && cmake -Bbuild -H."]
+		}
+		]
 	}],
 	"folders": [{
 		"name"                 : "nFlux",
 		"follow_symlinks"      : true,
-		"path"                 : "/home/minhpham/projects/nflux",
+		"path"                 : ".",
 		"file_exclude_patterns": [
 			"*.vcproj",
 			"*.vcxproj",
