@@ -24,7 +24,7 @@ constexpr T product(T arg1, Args... args) {
 }
 
 template<typename T, typename... Args>
-uint count(T arg1, Args... args) {
+constexpr uint count(T arg1, Args... args) {
 	return 1 + sizeof...(Args);
 }
 

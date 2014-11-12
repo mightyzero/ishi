@@ -1,7 +1,8 @@
 #ifndef CORE_ARRAY_H
 #define CORE_ARRAY_H
 
-#include <initializer_list>
+#include <initializer_list>    // std::initializer_list
+#include <array>               // std::array
 
 #include <core/Arithmetics.h>
 
@@ -19,32 +20,52 @@
  * @tparam s [description]
  * @tparam sizes [description]
  */
-template<typename T, uint32_t s, uint32_t... sizes>
+template<typename T, uint s, uint... sizes>
 class Array {
 public:
-	static const uint32_t size;
+	typedef T ElemType;
 
-	/**
-	 * @brief   Default constructor
-	 * @details Allocate memory for the array. Data is NOT initialized.
-	 */
-	Array() {
-		printf("size is: %d\n", size);
-	}
+	/// Number of elements
+	static const uint size = product(sizeof(T), s, sizes...);
 
-	/**
-	 * @brief   Construct and initialize the array with an initializer list
-	 * @details [long description]
-	 *
-	 * @param args [description]
-	 */
-	Array(std::initializer_list<T> args) {
-		printf("size is: %d\n", size);
-	}
+	/// Number of dimensions
+	static const uint rank = count(s, sizes...);
 
+	/// Dimensions of the data
+	static const std::array<T, Array::rank> dims;
+
+	/// Default constructor
+	Array();
+
+	/// Initialize data block using given data
+	Array(std::initializer_list<T> values);
+
+	/// Variadic constructor
+	template<typename... Ts>
+	Array(Ts... values);
+
+	// Virtual destructor
+	virtual ~Array() {}
+
+	// Copy constructor
+	// Move constructor
+
+	// Copy assignment
+
+	/// Implementation of single-element accessor
+	T operator()(std::initializer_list<uint32_t> indices);
+
+	/// Single element accessor
+	template<typename... UInts>
+	T operator()(const UInts... indices);
+
+
+
+private:
+	/// Data container
+	std::array<T, Array::size> m_data;
 };
 
-template<typename T, uint32_t s, uint32_t... sizes>
-const uint32_t Array<T, s, sizes...>::size = sizeof(T) * mult(s, sizes...);
+#include <core/ArrayImpl.cpp>
 
 #endif  // CORE_ARRAY_H

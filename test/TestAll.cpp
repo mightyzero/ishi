@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 
 #include <TestCommon.h>
+#include <TestArithmetics.h>
 #include <TestArray.h>
-//#include <TestMatrix.h>
-//#include <TestPoint.h>
+// #include <TestMatrix.h>
+// #include <TestPoint.h>
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
