@@ -46,5 +46,28 @@
 	{
 		"sublimegdb_commandline": "gdb --interpreter=mi myapp",
 		"sublimegdb_workingdir": "build",
+	},
+	"SublimeLinter":
+	{
+		"linters":
+		{
+			"clang": {
+				"include_dirs": [
+					"${project_folder}/src",
+					"${project_folder}/test/lib/gtest/include",
+					"/usr/include/c++/4.8",
+					"/usr/include/c++/4.8/backward",
+					"/usr/include/x86_64-linux-gnu/c++/4.8",
+					"/usr/local/include",
+					"/usr/lib/clang/3.4/include",
+					"/usr/lib/gcc/x86_64-linux-gnu/4.8/include",
+					"/usr/include/x86_64-linux-gnu",
+					"/usr/include"
+				],
+				"extra_flags" : "-std=c++11 -stdlib=libstdc++"
+			},
+			"cppcheck": {
+			}
+		}
 	}
 }
