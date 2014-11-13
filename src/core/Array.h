@@ -53,19 +53,92 @@ public:
 	// Copy assignment
 
 	/// Implementation of single-element accessor
-	T operator()(std::initializer_list<uint32_t> indices);
+	T operator()(std::initializer_list<uint> indices);
 
 	/// Single element accessor
 	template<typename... UInts>
 	T operator()(const UInts... indices);
-
-
 
 private:
 	/// Data container
 	std::array<T, Array::size> m_data;
 };
 
-#include <core/ArrayImpl.cpp>
+/*=============================================================================+
+ |                         I M P L E M E N T A T I O N                         |
+ +============================================================================*/
+
+#include <algorithm>          // std::copy
+
+#include <core/Exceptions.h>
+
+template<typename T, uint s, uint... sizes>
+const std::array<T, Array<T, s, sizes...>::rank>
+Array<T, s, sizes...>::dims = { s, sizes... };
+
+/**
+ * @brief   Default constructor
+ * @details Allocate memory for the array. Data is NOT initialized.
+ */
+template<typename T, uint s, uint... sizes>
+Array<T, s, sizes...>::Array() {}
+
+/**
+ * @brief Initializer list constructor
+ * @details [long description]
+ *
+ * @param values [description]
+ * @return [description]
+ */
+template<typename T, uint s, uint... sizes>
+Array<T, s, sizes...>::Array(std::initializer_list<T> values) {
+	std::copy(values.begin(), values.end(), m_data.begin());
+}
+
+/**
+ * @brief Variadic template constructor
+ * @details [long description]
+ *
+ * @param values [description]
+ * @return [description]
+ */
+template<typename T, uint s, uint... sizes>
+template<typename... Ts>
+Array<T, s, sizes...>::Array(Ts... values) : m_data { values... } {}
+
+/**
+ * @brief [brief description]
+ * @details [long description]
+ *
+ * @param indices [description]
+ * @return [description]
+ */
+template<typename T, uint s, uint... sizes>
+T Array<T, s, sizes...>::operator()(std::initializer_list<uint> indices) {
+	ASSERT(indices.size() == Array::rank);
+
+	uint offset = 0;
+	auto i = indices.begin();
+	auto d = dims.crbegin() + 1;
+	for (; i != indices.end(), d != dims.crend(); ++i, ++d) {
+		offset += (*d) * (*i);
+	}
+	offset += (*i);
+
+	return m_data[offset];
+}
+
+/**
+ * @brief [brief description]
+ * @details [long description]
+ *
+ * @param indices [description]
+ * @return [description]
+ */
+template<typename T, uint s, uint... sizes>
+template<typename... UInts>
+T Array<T, s, sizes...>::operator()(const UInts... indices) {
+	return (*this)({indices...});
+}
 
 #endif  // CORE_ARRAY_H
