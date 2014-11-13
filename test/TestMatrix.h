@@ -1,14 +1,14 @@
-// #ifndef TESTMATRIX_H
-// #define TESTMATRIX_H
+#ifndef TESTMATRIX_H
+#define TESTMATRIX_H
 
-// #include <gtest/gtest.h>
-// #include <core/Matrix.h>
+#include <gtest/gtest.h>
+#include <core/Matrix.h>
 
-// TEST(Matrix, Constructor) {
-// 	Matrix<int, 3, 3> m1;
-// 	Matrix<float, 4, 4> m2;
-// 	Matrix<double, 3, 4> m3;
-// }
+TEST(Matrix, DefaultConstructor) {
+	Matrix<int, 3, 3> m1;
+	Matrix<float, 4, 4> m2;
+	Matrix<double, 3, 4> m3;
+}
 
 // TEST(Matrix, Assignment) {
 // 	// Matrix<int,3,3> m;
@@ -47,7 +47,7 @@
 // 		 3, 3, 3;
 // 	ASSERT_TRUE(m4 == m4);
 // 	ASSERT_FALSE(m4 != m4);
-	
+
 // 	Matrix<int, 3, 3> m5;
 // 	m5 = 1, 1, 1,
 // 	     2, 2, 2,
@@ -127,7 +127,7 @@
 // 	     0, 0, 2;
 // 	ASSERT_TRUE(m1 * 2 == m2);
 // 	ASSERT_TRUE(2 * m1 == m2);
-	
+
 // 	m1 = 1, 2, 3,
 // 	     4, 5, 6,
 // 	     7, 8, 9;
@@ -136,7 +136,7 @@
 // 	     21, 24, 27;
 // 	ASSERT_TRUE(m1 * 3 == m2);
 // 	ASSERT_TRUE(3 * m1 == m2);
-	
+
 // }
 
 // TEST(Matrix, MatrixMultiply) {
@@ -171,7 +171,7 @@
 // 	ASSERT_FLOAT_EQ(m1.data()[13], m2.data()[13]);
 // 	ASSERT_FLOAT_EQ(m1.data()[14], m2.data()[14]);
 // 	ASSERT_FLOAT_EQ(m1.data()[15], m2.data()[15]);
-	
+
 // 	ASSERT_FLOAT_EQ(m1.data()[0], m3.data()[0]);
 // 	ASSERT_FLOAT_EQ(m1.data()[1], m3.data()[1]);
 // 	ASSERT_FLOAT_EQ(m1.data()[2], m3.data()[2]);
@@ -239,4 +239,4 @@
 // 	ASSERT_FLOAT_EQ(r2.data()[15], m4.data()[15]);
 // }
 
-// #endif // TESTMATRIX_H
+#endif // TESTMATRIX_H

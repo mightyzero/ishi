@@ -3,7 +3,7 @@
 #include <TestCommon.h>
 #include <TestArithmetics.h>
 #include <TestArray.h>
-// #include <TestMatrix.h>
+#include <TestMatrix.h>
 // #include <TestPoint.h>
 
 int main(int argc, char** argv) {
