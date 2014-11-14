@@ -4,7 +4,7 @@
 #include <initializer_list>    // std::initializer_list
 #include <array>               // std::array
 
-#include <core/Arithmetics.h>
+#include <core/Math.h>
 
 /**
  * @brief   Template class functioning as a data holder.

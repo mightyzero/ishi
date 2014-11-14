@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <TestCommon.h>
-#include <TestArithmetics.h>
+#include <TestMath.h>
 #include <TestArray.h>
 #include <TestMatrix.h>
 // #include <TestPoint.h>

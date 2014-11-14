@@ -1,8 +1,8 @@
-#ifndef TEST_TESTARITHMETICS_H
-#define TEST_TESTARITHMETICS_H
+#ifndef TEST_TESTMATH_H
+#define TEST_TESTMATH_H
 
 #include <gtest/gtest.h>
-#include <core/Arithmetics.h>
+#include <core/Math.h>
 
 TEST(sum, CorrectResult) {
 	EXPECT_EQ(1, sum(1));
@@ -26,4 +26,4 @@ TEST(count, CorrectResult) {
 }
 
 
-#endif  // TEST_TESTARITHMETICS_H
+#endif  // TEST_TESTMATH_H
