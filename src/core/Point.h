@@ -1,5 +1,5 @@
-#ifndef NF_POINT_H
-#define NF_POINT_H
+#ifndef CORE_POINT_H
+#define CORE_POINT_H
 
 #include <core/Common.h>
 
@@ -23,7 +23,7 @@ bool operator!=(const Point<T,D>& p1, const Point<T,D>& p2);
 
 /***************************************************************************//**
  * \brief Parameterized class that defines a point in space
- * 
+ *
  * \tparam T The precision of the scalar used to represent the point
  * \tparam D The number of dimensions of the space the point is in
  ******************************************************************************/
@@ -38,15 +38,15 @@ public:
 	Point(const Point& other);
 	template <typename... T2>
 	Point(const T2&... vals);
-	
+
 	T& x();
 	T& y();
 	T& z();
 	T& operator[](const uint32_t index);
-	
+
 	/* Friend Declarations */
 	friend Point operator+<>(const Point& p1, const Point& p2);
-	
+
 	friend bool operator==<>(const Point& p1, const Point& p2);
 	friend bool operator!=<>(const Point& p1, const Point& p2);
 };
@@ -56,4 +56,4 @@ public:
 //       for all template classes
 #include <core/PointImpl.cpp>
 
-#endif  // NF_POINT_H
+#endif  // CORE_MATRIX_H

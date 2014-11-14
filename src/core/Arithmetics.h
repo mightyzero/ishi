@@ -1,5 +1,5 @@
-#ifndef CORE_ARITHMETICS
-#define CORE_ARITHMETICS
+#ifndef CORE_ARITHMETICS_H
+#define CORE_ARITHMETICS_H
 
 #include <core/Common.h>
 
@@ -28,4 +28,4 @@ constexpr uint count(T arg1, Args... args) {
 	return 1 + sizeof...(Args);
 }
 
-#endif  // CORE_ARITHMETICS
+#endif  // CORE_ARITHMETICS_H

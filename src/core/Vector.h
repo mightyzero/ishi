@@ -1,5 +1,5 @@
-#ifndef NF_VECTOR_H
-#define NF_VECTOR_H
+#ifndef CORE_VECTOR_H
+#define CORE_VECTOR_H
 
 #include <core/Common.h>
 
@@ -62,14 +62,14 @@ Vector<D,T>& normalize(Vector<D,T>& vec);
 
 /***************************************************************************//**
  * \brief Parameterized class that defines a vector (direction in space)
- * 
- *        Vector extends Array by providing named accessors (x, y, z) and 
+ *
+ *        Vector extends Array by providing named accessors (x, y, z) and
  *        vector arithmetics, namely:
  *        - Vector addition, subtraction, multiplication, scaling
  *        - Vector normalization
  *        - Vector addition with Point class
  *        - Vector transformation (with Transform class)
- * 
+ *
  * \tparam T The precision of the scalar used to represent the vector
  * \tparam D The number of dimensions of the space the vector is in
  ******************************************************************************/
@@ -81,22 +81,22 @@ private:
 public:
 	Vector();
 	Vector(const Vector& other);
-	
+
 	T& x();
 	T& y();
 	T& z();
 	T& operator[](const uint32_t index);
-	
+
 	/// \brief Increment by another vector
 	Vector& operator+=(const Vector& other);
-	
+
 	/// \brief Scale by a scalar
 	template <
 		typename T2,
 		typename std::enable_if<std::is_integral<T2>::value,int>::type = 0
 	>
 	Vector& operator*=(const T2& factor);
-	
+
 	/// \brief Divide by a scalar
 	template <
 		typename T2,
