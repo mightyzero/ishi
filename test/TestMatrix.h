@@ -48,8 +48,8 @@ TEST(Matrix, ScalarMultiply) {
 	m2 = { 2, 0, 0,
 	       0, 2, 0,
 	       0, 0, 2 };
-	// ASSERT_TRUE(m1 * 2 == m2);
-	// ASSERT_TRUE(2 * m1 == m2);
+	ASSERT_TRUE(m1 * 2 == m2);
+	ASSERT_TRUE(2 * m1 == m2);
 
 	// m1 = 1, 2, 3,
 	//      4, 5, 6,

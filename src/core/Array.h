@@ -23,6 +23,7 @@
 template<typename T, uint s, uint... sizes>
 class Array {
 public:
+	// Type definitions
 	typedef T ElemType;
 
 	/// Number of elements
@@ -60,8 +61,29 @@ public:
 	T operator()(const UInts... indices);
 
 private:
+	typedef std::array<T, Array::size> ContainerT;
+
 	/// Data container
-	std::array<T, Array::size> m_data;
+	ContainerT m_data;
+
+public:
+	typedef typename ContainerT::iterator               iterator;
+	typedef typename ContainerT::const_iterator         const_iterator;
+	typedef typename ContainerT::reverse_iterator       reverse_iterator;
+	typedef typename ContainerT::const_reverse_iterator const_reverse_iterator;
+
+	// Iterator access
+	iterator begin() { return m_data.begin(); }
+	iterator end()   { return m_data.end();   }
+
+	const_iterator cbegin() const { return m_data.cbegin(); }
+	const_iterator cend()   const { return m_data.cend();   }
+
+	reverse_iterator rbegin() { return m_data.rbegin(); }
+	reverse_iterator rend()   { return m_data.rend();   }
+
+	const_reverse_iterator crbegin() const { return m_data.crbegin(); }
+	const_reverse_iterator crend()   const { return m_data.crend();   }
 };
 
 /*=============================================================================+
