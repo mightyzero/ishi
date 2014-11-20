@@ -42,10 +42,10 @@ Tensor<T, sizes...> operator-(Tensor<T, sizes...> &lhs,
                               const Tensor<T, sizes...> &rhs);
 
 template <typename T, uint... sizes>
-Tensor<T, sizes...> operator*(const Tensor<T, sizes...> &lhs, const T scale);
+Tensor<T, sizes...> operator*(Tensor<T, sizes...> lhs, const T scale);
 
 template <typename T, uint... sizes>
-Tensor<T, sizes...> operator*(const T scale, const Tensor<T, sizes...> &rhs);
+Tensor<T, sizes...> operator*(const T scale, Tensor<T, sizes...> rhs);
 
 template <typename T, uint... sizes>
 bool operator==(const Tensor<T, sizes...> &lhs, const Tensor<T, sizes...> &rhs);
@@ -89,6 +89,23 @@ template <typename... Ts>
 Tensor<T, sizes...>::Tensor(Ts... values)
     : Array<T, sizes...>(values...) {}
 
+template <typename T, uint... sizes>
+Tensor<T, sizes...>& Tensor<T, sizes...>::operator+=(const Tensor<T, sizes...>& rhs) {
+	for (auto i = this->begin(), j = rhs->cbegin();
+	     i != this->end(), j != rhs->end(); ++i, ++j)
+		(*i) += (*j);
+	return (*this);
+}
+
+template <typename T, uint... sizes>
+Tensor<T, sizes...>& Tensor<T, sizes...>::
+operator-=(const Tensor<T, sizes...>& rhs) {
+	for (auto i = this->begin(), j = rhs->cbegin();
+	     i != this->end(), j != rhs->end(); ++i, ++j)
+		(*i) -= (*j);
+	return (*this);
+}
+
 /**
  * @brief   Compound scaling operator
  * @details [long description]
@@ -98,16 +115,28 @@ Tensor<T, sizes...>::Tensor(Ts... values)
  */
 template <typename T, uint... sizes>
 Tensor<T, sizes...> &Tensor<T, sizes...>::operator*=(const T scale) {
+	for (auto i = this->begin(); i != this->end(); ++i) {
+		(*i) *= scale;
+	}
 	return (*this);
 }
 
 template <typename T, uint... sizes>
-Tensor<T, sizes...> operator*(const Tensor<T, sizes...> &lhs, const T scale) {
+Tensor<T, sizes...> operator+(Tensor<T, sizes...> &lhs,
+                              const Tensor<T, sizes...> &rhs);
+
+template <typename T, uint... sizes>
+Tensor<T, sizes...> operator-(Tensor<T, sizes...> &lhs,
+                              const Tensor<T, sizes...> &rhs);
+
+
+template <typename T, uint... sizes>
+Tensor<T, sizes...> operator*(Tensor<T, sizes...> lhs, const T scale) {
 	return lhs *= scale;
 }
 
 template <typename T, uint... sizes>
-Tensor<T, sizes...> operator*(const T scale, const Tensor<T, sizes...> &rhs) {
+Tensor<T, sizes...> operator*(const T scale, Tensor<T, sizes...> rhs) {
 	return rhs *= scale;
 }
 

@@ -11,9 +11,7 @@ TEST(Matrix, DefaultConstructor) {
 }
 
 TEST(Matrix, Assignment) {
-	Matrix<int,3,3> m { 1, 1, 1,
-	                    2, 2, 2,
-	                    3, 3, 3 };
+	Matrix<int, 3, 3> m{ 1, 1, 1, 2, 2, 2, 3, 3, 3 };
 	EXPECT_EQ(1, m(0, 0));
 	EXPECT_EQ(1, m(0, 1));
 	EXPECT_EQ(1, m(0, 2));
@@ -24,10 +22,8 @@ TEST(Matrix, Assignment) {
 	EXPECT_EQ(3, m(2, 1));
 	EXPECT_EQ(3, m(2, 2));
 
-	Matrix<float, 3, 3> m2 {
-		8.0f, 7.5f, 7.0f,
-		6.5f, 6.0f, 5.5f,
-		5.0f, 4.5f, 4.0f
+	Matrix<float, 3, 3> m2{
+		8.0f, 7.5f, 7.0f, 6.5f, 6.0f, 5.5f, 5.0f, 4.5f, 4.0f
 	};
 	EXPECT_FLOAT_EQ(8.0f, m2(0, 0));
 	EXPECT_FLOAT_EQ(7.5f, m2(0, 1));
@@ -40,25 +36,44 @@ TEST(Matrix, Assignment) {
 	EXPECT_FLOAT_EQ(4.0f, m2(2, 2));
 }
 
-TEST(Matrix, ScalarMultiply) {
-	Matrix<int, 3, 3> m1, m2, m3;
-	m1 = { 1, 0, 0,
-	       0, 1, 0,
-	       0, 0, 1 };
-	m2 = { 2, 0, 0,
-	       0, 2, 0,
-	       0, 0, 2 };
-	ASSERT_TRUE(m1 * 2 == m2);
-	ASSERT_TRUE(2 * m1 == m2);
+TEST(Matrix, CompoundMultiplyByInt) {
+	Matrix<int, 3, 3> m{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	m *= 7;
+	EXPECT_EQ(7, m(0, 0));
+	EXPECT_EQ(14, m(0, 1));
+	EXPECT_EQ(21, m(0, 2));
+	EXPECT_EQ(28, m(1, 0));
+	EXPECT_EQ(35, m(1, 1));
+	EXPECT_EQ(42, m(1, 2));
+	EXPECT_EQ(49, m(2, 0));
+	EXPECT_EQ(56, m(2, 1));
+	EXPECT_EQ(63, m(2, 2));
+}
 
-	// m1 = 1, 2, 3,
-	//      4, 5, 6,
-	//      7, 8, 9;
-	// m2 =  3,  6,  9,
-	//      12, 15, 18,
-	//      21, 24, 27;
-	// ASSERT_TRUE(m1 * 3 == m2);
-	// ASSERT_TRUE(3 * m1 == m2);
+TEST(Matrix, MultiplyByInt) {
+	Matrix<int, 3, 3> m1, m2, m3;
+	m1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	m2 = m1 * 7;
+	EXPECT_EQ(7, m2(0, 0));
+	EXPECT_EQ(14, m2(0, 1));
+	EXPECT_EQ(21, m2(0, 2));
+	EXPECT_EQ(28, m2(1, 0));
+	EXPECT_EQ(35, m2(1, 1));
+	EXPECT_EQ(42, m2(1, 2));
+	EXPECT_EQ(49, m2(2, 0));
+	EXPECT_EQ(56, m2(2, 1));
+	EXPECT_EQ(63, m2(2, 2));
+
+	m3 = 7 * m1;
+	EXPECT_EQ(7, m3(0, 0));
+	EXPECT_EQ(14, m3(0, 1));
+	EXPECT_EQ(21, m3(0, 2));
+	EXPECT_EQ(28, m3(1, 0));
+	EXPECT_EQ(35, m3(1, 1));
+	EXPECT_EQ(42, m3(1, 2));
+	EXPECT_EQ(49, m3(2, 0));
+	EXPECT_EQ(56, m3(2, 1));
+	EXPECT_EQ(63, m3(2, 2));
 }
 
 // TEST(Matrix, MatrixMultiply) {
