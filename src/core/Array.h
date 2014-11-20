@@ -20,17 +20,17 @@
  * @tparam s [description]
  * @tparam sizes [description]
  */
-template<typename T, uint s, uint... sizes>
+template<typename T, uint... sizes>
 class Array {
 public:
 	// Type definitions
 	typedef T ElemType;
 
 	/// Number of elements
-	static const uint size = product(sizeof(T), s, sizes...);
+	static const uint size = product(sizeof(T), sizes...);
 
 	/// Number of dimensions
-	static const uint rank = count(s, sizes...);
+	static const uint rank = count(sizes...);
 
 	/// Dimensions of the data
 	static const std::array<T, Array::rank> dims;
@@ -93,16 +93,16 @@ public:
 
 #include <core/Exceptions.h>
 
-template<typename T, uint s, uint... sizes>
-const std::array<T, Array<T, s, sizes...>::rank>
-Array<T, s, sizes...>::dims = { s, sizes... };
+template<typename T, uint... sizes>
+const std::array<T, Array<T, sizes...>::rank>
+Array<T, sizes...>::dims = { sizes... };
 
 /**
  * @brief   Default constructor
  * @details Allocate memory for the array. Data is NOT initialized.
  */
-template<typename T, uint s, uint... sizes>
-Array<T, s, sizes...>::Array() {}
+template<typename T, uint... sizes>
+Array<T, sizes...>::Array() {}
 
 /**
  * @brief Initializer list constructor
@@ -111,8 +111,8 @@ Array<T, s, sizes...>::Array() {}
  * @param values [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
-Array<T, s, sizes...>::Array(std::initializer_list<T> values) {
+template<typename T, uint... sizes>
+Array<T, sizes...>::Array(std::initializer_list<T> values) {
 	std::copy(values.begin(), values.end(), m_data.begin());
 }
 
@@ -123,9 +123,9 @@ Array<T, s, sizes...>::Array(std::initializer_list<T> values) {
  * @param values [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
+template<typename T, uint... sizes>
 template<typename... Ts>
-Array<T, s, sizes...>::Array(Ts... values) : m_data { values... } {}
+Array<T, sizes...>::Array(Ts... values) : m_data { values... } {}
 
 /**
  * @brief [brief description]
@@ -134,8 +134,8 @@ Array<T, s, sizes...>::Array(Ts... values) : m_data { values... } {}
  * @param indices [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
-T Array<T, s, sizes...>::operator()(std::initializer_list<uint> indices) {
+template<typename T, uint... sizes>
+T Array<T, sizes...>::operator()(std::initializer_list<uint> indices) {
 	ASSERT(indices.size() == Array::rank);
 
 	uint offset = 0;
@@ -156,9 +156,9 @@ T Array<T, s, sizes...>::operator()(std::initializer_list<uint> indices) {
  * @param indices [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
+template<typename T, uint... sizes>
 template<typename... UInts>
-T Array<T, s, sizes...>::operator()(const UInts... indices) {
+T Array<T, sizes...>::operator()(const UInts... indices) {
 	return (*this)({indices...});
 }
 

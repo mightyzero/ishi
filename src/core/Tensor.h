@@ -10,27 +10,27 @@
  |                            I N T E R F A C E                                |
  +============================================================================*/
 /* Forward declaration of class */
-template<typename T, uint s, uint... sizes>
+template<typename T, uint... sizes>
 class Tensor;
 
 /* Forward declaration of friend operators */
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...> operator+(Tensor<T, s, sizes...>& lhs, const Tensor<T, s, sizes...>& rhs);
+template<typename T, uint... sizes>
+Tensor<T, sizes...> operator+(Tensor<T, sizes...>& lhs, const Tensor<T, sizes...>& rhs);
 
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...> operator-(Tensor<T, s, sizes...>& lhs, const Tensor<T, s, sizes...>& rhs);
+template<typename T, uint... sizes>
+Tensor<T, sizes...> operator-(Tensor<T, sizes...>& lhs, const Tensor<T, sizes...>& rhs);
 
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...> operator*(Tensor<T, s, sizes...>& lhs, const T scale);
+template<typename T, uint... sizes>
+Tensor<T, sizes...> operator*(Tensor<T, sizes...>& lhs, const T scale);
 
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...> operator*(const T scale, Tensor<T, s, sizes...>& rhs);
+template<typename T, uint... sizes>
+Tensor<T, sizes...> operator*(const T scale, Tensor<T, sizes...>& rhs);
 
-template<typename T, uint s, uint... sizes>
-bool operator==(const Tensor<T, s, sizes...>& lhs, const Tensor<T, s, sizes...>& rhs);
+template<typename T, uint... sizes>
+bool operator==(const Tensor<T, sizes...>& lhs, const Tensor<T, sizes...>& rhs);
 
-template<typename T, uint s, uint... sizes>
-bool operator!=(const Tensor<T, s, sizes...>& lhs, const Tensor<T, s, sizes...>& rhs);
+template<typename T, uint... sizes>
+bool operator!=(const Tensor<T, sizes...>& lhs, const Tensor<T, sizes...>& rhs);
 
 /**
  * @brief [brief description]
@@ -40,8 +40,8 @@ bool operator!=(const Tensor<T, s, sizes...>& lhs, const Tensor<T, s, sizes...>&
  * @tparam s [description]
  * @tparam sizes [description]
  */
-template<typename T, uint s, uint... sizes>
-class Tensor : public Array<T, s, sizes...> {
+template<typename T, uint... sizes>
+class Tensor : public Array<T, sizes...> {
 public:
 	// Contructors
 	Tensor();
@@ -76,8 +76,8 @@ public:
  * @param y [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...>::Tensor() : Array<T, s, sizes...>() {}
+template<typename T, uint... sizes>
+Tensor<T, sizes...>::Tensor() : Array<T, sizes...>() {}
 
 /**
  * @brief   Initializer list constructor
@@ -86,9 +86,9 @@ Tensor<T, s, sizes...>::Tensor() : Array<T, s, sizes...>() {}
  * @param  [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...>::Tensor(std::initializer_list<T> values)
-		: Array<T, s, sizes...>(values) {}
+template<typename T, uint... sizes>
+Tensor<T, sizes...>::Tensor(std::initializer_list<T> values)
+		: Array<T, sizes...>(values) {}
 
 /**
  * @brief   Variadic template constructor
@@ -97,10 +97,10 @@ Tensor<T, s, sizes...>::Tensor(std::initializer_list<T> values)
  * @param values [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
+template<typename T, uint... sizes>
 template<typename... Ts>
-Tensor<T, s, sizes...>::Tensor(Ts... values)
-		: Array<T, s, sizes...>(values...) {}
+Tensor<T, sizes...>::Tensor(Ts... values)
+		: Array<T, sizes...>(values...) {}
 
 /**
  * @brief   Compound scaling operator
@@ -109,28 +109,28 @@ Tensor<T, s, sizes...>::Tensor(Ts... values)
  * @param scale [description]
  * @return [description]
  */
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...>& Tensor<T, s, sizes...>::operator*=(const T scale) {
+template<typename T, uint... sizes>
+Tensor<T, sizes...>& Tensor<T, sizes...>::operator*=(const T scale) {
 	return (*this);
 }
 
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...> operator*(Tensor<T, s, sizes...>& lhs, const T scale) {
+template<typename T, uint... sizes>
+Tensor<T, sizes...> operator*(Tensor<T, sizes...>& lhs, const T scale) {
 	return lhs *= scale;
 }
 
-template<typename T, uint s, uint... sizes>
-Tensor<T, s, sizes...> operator*(const T scale, Tensor<T, s, sizes...>& rhs) {
+template<typename T, uint... sizes>
+Tensor<T, sizes...> operator*(const T scale, Tensor<T, sizes...>& rhs) {
 	return rhs *= scale;
 }
 
-template<typename T, uint s, uint... sizes>
-bool operator==(const Tensor<T, s, sizes...>& lhs, const Tensor<T, s, sizes...>& rhs) {
+template<typename T, uint... sizes>
+bool operator==(const Tensor<T, sizes...>& lhs, const Tensor<T, sizes...>& rhs) {
 	return std::equal(lhs.cbegin(), lhs.cend(), rhs.cbegin());
 }
 
-template<typename T, uint s, uint... sizes>
-bool operator!=(const Tensor<T, s, sizes...>& lhs, const Tensor<T, s, sizes...>& rhs) {
+template<typename T, uint... sizes>
+bool operator!=(const Tensor<T, sizes...>& lhs, const Tensor<T, sizes...>& rhs) {
 	return !(lhs == rhs);
 }
 
