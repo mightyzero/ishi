@@ -10,7 +10,7 @@
  * @param arg1 The argument
  * @return  The argument given
  */
-template<typename T>
+template <typename T>
 constexpr T sum(T arg1) {
 	return arg1;
 }
@@ -23,7 +23,7 @@ constexpr T sum(T arg1) {
  * @param args [description]
  * @return [description]
  */
-template<typename T, typename... Args>
+template <typename T, typename... Args>
 constexpr uint sum(T arg1, Args... args) {
 	return arg1 + sum(args...);
 }
@@ -35,7 +35,7 @@ constexpr uint sum(T arg1, Args... args) {
  * @param arg1 [description]
  * @return [description]
  */
-template<typename T>
+template <typename T>
 constexpr T product(T arg1) {
 	return arg1;
 }
@@ -48,7 +48,7 @@ constexpr T product(T arg1) {
  * @param args [description]
  * @return [description]
  */
-template<typename T, typename... Args>
+template <typename T, typename... Args>
 constexpr T product(T arg1, Args... args) {
 	return arg1 * product(args...);
 }
@@ -61,7 +61,7 @@ constexpr T product(T arg1, Args... args) {
  * @param args [description]
  * @return [description]
  */
-template<typename T, typename... Args>
+template <typename T, typename... Args>
 constexpr uint count(T arg1, Args... args) {
 	return 1 + sizeof...(Args);
 }
@@ -74,7 +74,7 @@ constexpr uint count(T arg1, Args... args) {
  * @param arg2 [description]
  * @return [description]
  */
-template<typename T1, typename T2>
+template <typename T1, typename T2>
 constexpr bool eq(T1 arg1, T2 arg2) {
 	return (arg1 == arg2);
 }
@@ -87,9 +87,9 @@ constexpr bool eq(T1 arg1, T2 arg2) {
  * @param arg2 [description]
  * @return [description]
  */
-template<typename T1, typename T2>
+template <typename T1, typename T2>
 constexpr bool neq(T1 arg1, T2 arg2) {
 	return !eq(arg1, arg2);
 }
 
-#endif  // CORE_ARITHMETICS_H
+#endif // CORE_ARITHMETICS_H
