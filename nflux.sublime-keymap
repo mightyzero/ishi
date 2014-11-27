@@ -1,0 +1,4 @@
+[
+	{"keys": ["ctrl+shift+u"], "command": "build", "args": {"variant": "Run Tests"}},
+	{"keys": ["ctrl+shift+g"], "command": "build", "args": {"variant": "Generate Build Files with CMake"}}
+]

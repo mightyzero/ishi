@@ -24,7 +24,6 @@
 			"*.vcproj",
 			"*.vcxproj",
 			"*.sln",
-			"*.gitignore",
 			"*.gitmodules",
 			"*.vcxproj.*",
 			"*.kdev4",

@@ -38,3 +38,6 @@ cmake_install.cmake
 
 # Code coverage result files
 *.gcov
+
+# Sublime temporary files
+*.sublime-workspace
