@@ -17,25 +17,18 @@
 #==============================================================================#
 cmake_minimum_required(VERSION 2.8)
 
-set(DO_COVERAGE true)
-
-#------------------------------------------------------------------------------#
-# Set up project details                                                       #
-#------------------------------------------------------------------------------#
+#-----------------#
+# Project Details #
+#-----------------#
 project(nFlux)
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
 set(VERSION_PATCH 0)
 
-#------------------------------------------------------------------------------#
-# Add library finder modules path                                              #
-#------------------------------------------------------------------------------#
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-
-#------------------------------------------------------------------------------#
-# Configure compiler and linker options                                        #
-#------------------------------------------------------------------------------#
+#-----------------------------#
+# Compiler and Linker Options #
+#-----------------------------#
 # Set compiler flags
 if (MSVC)
 	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "/Wall")
@@ -44,13 +37,16 @@ else (MSVC)
 		"-g -O0 -w -Wall -Wextra -std=c++11"
 	)
 	set(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG}
-		"-g -O0 -w -std=c++11"
+		"-g -O0 -w -Wall -Wextra -std=c++11"
 	# 	"-g -O0 -Wall -W -Wshadow -Wunused-variable -Wunused-parameter"
 	# 	"-Wunused-function -Wunused -Wno-system-headers -Wno-deprecated"
 	# 	"-Woverloaded-virtual -Wwrite-strings -Wextra -std=c++11"
 	)
 endif (MSVC)
 
+#---------------#
+# Build Outputs #
+#---------------#
 # First for the generic no-config case (e.g. with mingw)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -64,6 +60,11 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/lib)
 endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 
+#------------------------------------------------------------------------------#
+# Configure Code Coverage Options                                              #
+#------------------------------------------------------------------------------#
+set(DO_COVERAGE true)
+
 if (DO_COVERAGE)
 	message(STATUS "Code coverage is enabled - adding flags")
 
@@ -73,46 +74,92 @@ if (DO_COVERAGE)
 	    "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 endif (DO_COVERAGE)
 
-#------------------------------------------------------------------------------#
-# PATHS TO IMPORTANT DIRECTORIES                                               #
-#------------------------------------------------------------------------------#
-# Paths to project root directories
-set(INC_ROOT  ${PROJECT_SOURCE_DIR}/src)
-set(SRC_ROOT  ${PROJECT_SOURCE_DIR}/src)
-set(LIB_ROOT  ${PROJECT_SOURCE_DIR}/lib)
-set(TEST_ROOT ${PROJECT_SOURCE_DIR}/test)
+#--------------------------------#
+# Paths to Important Directories #
+#--------------------------------#
+set(INC_DIR  ${PROJECT_SOURCE_DIR}/src)
+set(SRC_DIR  ${PROJECT_SOURCE_DIR}/src)
+set(LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
 
-# Paths to project include directories
-set(CORE_INCLUDE ${INC_ROOT}/core)
-
-# Paths to external libraries directories
-set(LIB_SFML_DIR ${LIB_ROOT}/SFML)
-set(LIB_GLEW_DIR ${LIB_ROOT}/GLEW)
-set(LIB_LTGA_DIR ${LIB_ROOT}/libtga)
+set(TEST_DIR     ${PROJECT_SOURCE_DIR}/test)
+set(TEST_LIB_DIR ${TEST_DIR}/lib)
+set(TEST_SRC_DIR ${TEST_DIR}/src)
 
 # Paths to external libraries include directories
-set(LIB_SFML_INCLUDE   ${LIB_ROOT}/SFML/include)
-set(LIB_LTGA_INCLUDE   ${LIB_ROOT}/libtga/src)
-set(LIB_GTEST_INCLUDE  ${TEST_ROOT}/lib/gtest/include)
+set(LIB_SFML_INCLUDE   ${LIB_DIR}/SFML/include)
+set(LIB_LTGA_INCLUDE   ${LIB_DIR}/libtga/src)
+set(LIB_GTEST_INCLUDE  ${TEST_DIR}/lib/gtest/include)
 
-#------------------------------------------------------------------------------#
-# List subdirectories                                                          #
-#------------------------------------------------------------------------------#
+#--------------------#
+# Build Dependencies #
+#--------------------#
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
 # set(BUILD_SHARED_LIBS False)
-# Build external libraries
-add_subdirectory(${LIB_SFML_DIR})    # Build SFML
-add_subdirectory(${LIB_GLEW_DIR})    # Build GLEW
-add_subdirectory(${LIB_LTGA_DIR})    # Build libTGA
 
-# Build project
-add_subdirectory(${SRC_ROOT})        # Build project source
-add_subdirectory(${TEST_ROOT})       # Build project test
+add_subdirectory(${LIB_DIR}/SFML)      # Build SFML
+add_subdirectory(${LIB_DIR}/GLEW)      # Build GLEW
+add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
 
-# Add Doxygen target
-add_subdirectory(${PROJECT_SOURCE_DIR}/docs)
+#---------------------------#
+# List Project Source Files #
+#---------------------------#
+set(SOURCES
+	${SRC_DIR}/core/Matrix.h
+	${SRC_DIR}/core/Point.h
+	${SRC_DIR}/core/Vector.h
+	${SRC_DIR}/main.cpp)
 
-#------------------------------------------------------------------------------#
-# Add and run tests                                                            #
-#------------------------------------------------------------------------------#
+#---------------#
+# Build Project #
+#---------------#
+set(EXEC nflux)
+
+include_directories(
+	${INC_DIR}
+	${INC_DIR}/core
+	${LIB_SFML_INCLUDE})
+add_executable(${EXEC} ${SOURCES})
+target_link_libraries(${EXEC} sfml-window	tga)
+
+#------------------------#
+# List Test Source Files #
+#------------------------#
+set(TEST_SOURCE
+	${TEST_DIR}/TestAll.cpp)
+
+#-------------#
+# Build Tests #
+#-------------#
+set(TEST_EXEC nflux_test)
+
+include_directories(
+	${INC_DIR}
+	${TEST_DIR}
+	${TEST_LIB_DIR}/gtest/include)
+add_subdirectory(${TEST_LIB_DIR}/gtest)
+add_executable(${TEST_EXEC} ${SOURCE} ${TEST_SOURCE})
+target_link_libraries(${TEST_EXEC} gtest)
+
 enable_testing()
-add_test(unittest TestAll)
+add_test(unittest ${TEST_EXEC})
+
+#------------------------#
+# Generate Documentation #
+#------------------------#
+find_package(Doxygen)
+if (DOXYGEN_FOUND)
+	# Set Doxygen output to the docs dir in the build directory
+	set(DOCS_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/docs)
+
+	# Generate Doxyfile from Doxyfile.in, plugging in CMake variables
+	configure_file(
+		${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
+		${CMAKE_BINARY_DIR}/Doxyfile @ONLY)
+
+	# Add the make docs target
+	add_custom_target(docs
+		${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src
+		COMMENT "Generating API documentation with Doxygen" VERBATIM)
+endif (DOXYGEN_FOUND)
