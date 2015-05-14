@@ -1,66 +1,13 @@
 {
-	"build_systems": [
+	"SublimeLinter":
+	{
+		"linters":
 		{
-			"name": "Build with Make",
-			"working_dir": "${project_path}",
-			"cmd": [
-				"make",
-				"-C",
-				"build"
-			],
-			"file_regex": "^(..[^:\n]*):([0-9]+):?([0-9]+)?:? (.*)$",
-			"variants": [
-				{
-					"name": "Run Tests",
-					"cmd": [
-						"build/TestAll"
-					]
-				},
-				{
-					"name": "Generate Build Files with CMake",
-					"shell": true,
-					"cmd": [
-						"rm --recursive --force build && cmake -Bbuild -H."
-					]
-				}
-			]
-		}
-	],
-	"folders": [
-		{
-			"name": "nFlux",
-			"follow_symlinks": true,
-			"path": ".",
-			"file_exclude_patterns": [
-				"*.vcproj",
-				"*.vcxproj",
-				"*.sln",
-				"*.gitmodules",
-				"*.vcxproj.*",
-				"*.kdev4",
-				"*.project",
-				"*.mk",
-				".cmake_dirty"
-			],
-			"folder_exclude_patterns": [
-				"build",
-				"out",
-				"third_party",
-				".git",
-				"Debug",
-				"Release",
-				".kdev4"
-			]
-		}
-	],
-	"settings": {
-		"sublimegdb_commandline": "gdb --interpreter=mi nflux",
-		"sublimegdb_workingdir": "build"
-	},
-	"SublimeLinter": {
-		"linters": {
-			"clang": {
-				"include_dirs": [
+			"clang":
+			{
+				"extra_flags": "-std=c++11 -stdlib=libstdc++",
+				"include_dirs":
+				[
 					"${project}/src",
 					"${project}/lib/SFML/include",
 					"${project}/test/lib/gtest/include",
@@ -73,10 +20,48 @@
 					"/usr/lib/gcc/x86_64-linux-gnu/4.8/include",
 					"/usr/include/x86_64-linux-gnu",
 					"/usr/include"
-				],
-				"extra_flags": "-std=c++11 -stdlib=libstdc++"
+				]
 			},
-			"cppcheck": {}
+			"cppcheck":
+			{
+			}
 		}
+	},
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"make",
+				"-C",
+				"build"
+			],
+			"file_regex": "^(..[^:\n]*):([0-9]+):?([0-9]+)?:? (.*)$",
+			"name": "Build with Make",
+			"variants":
+			[
+				{
+					"cmd":
+					[
+						"build/TestAll"
+					],
+					"name": "Run Tests"
+				},
+				{
+					"cmd":
+					[
+						"rm --recursive --force build && cmake -Bbuild -H."
+					],
+					"name": "Generate Build Files with CMake",
+					"shell": true
+				}
+			],
+			"working_dir": "${project_path}"
+		}
+	],
+	"settings":
+	{
+		"sublimegdb_commandline": "gdb --interpreter=mi nflux",
+		"sublimegdb_workingdir": "build"
 	}
 }
