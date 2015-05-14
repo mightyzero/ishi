@@ -154,7 +154,7 @@ if (DOXYGEN_FOUND)
 
 	# Generate Doxyfile from Doxyfile.in, plugging in CMake variables
 	configure_file(
-		${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
+		${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
 		${CMAKE_BINARY_DIR}/Doxyfile @ONLY)
 
 	# Add the make docs target
