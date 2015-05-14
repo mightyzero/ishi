@@ -1,5 +1,6 @@
 # Common build products
 build
+Doxyfile
 
 # Visual Studio solution files
 *.opensdf
