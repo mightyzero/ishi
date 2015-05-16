@@ -1,4 +1,12 @@
 {
+	"folders":
+	[
+		{
+			"file_exclude_patterns": ["*.vcxproj", "*.vcxproj.filters", "*.sln", "*.cmake"],
+			"follow_symlinks": true,
+			"path": ".",
+		}
+	],
 	"SublimeLinter":
 	{
 		"linters":
@@ -8,10 +16,11 @@
 				"extra_flags": "-std=c++11 -stdlib=libstdc++",
 				"include_dirs":
 				[
-					"${project}/src",
 					"${project}/lib/SFML/include",
-					"${project}/test/lib/gtest/include",
+					"${project}/src",
 					"${project}/test",
+					"${project}/test/include",
+					"${project}/test/lib/gtest/include",
 					"/usr/include/c++/4.8",
 					"/usr/include/c++/4.8/backward",
 					"/usr/include/x86_64-linux-gnu/c++/4.8",
