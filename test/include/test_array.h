@@ -2,8 +2,8 @@
 #define TEST_TESTARRAY_H
 
 #include <gtest/gtest.h>
-#include <core/Array.h>
-#include <core/Exceptions.h>
+#include <core/array.h>
+#include <core/exceptions.h>
 
 TEST(Array, DefaultConstruction) {
 	Array<float,  1> 	   array1;

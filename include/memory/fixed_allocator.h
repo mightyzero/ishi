@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include <core/Common.h>
-#include <memory/Chunk.h>
+#include <core/common.h>
+#include <memory/chunk.h>
 
 /**
  * @class FixedAllocator
@@ -20,15 +20,15 @@ private:
 	Chunks        m_chunks;
 	Chunk*        m_allocChunk;    ///< Chunk last allocated from
 	Chunk*        m_deallocChunk;  ///< Chunk last deallocated from
-	
+
 public:
 	FixedAllocator(size_t blockSize, unsigned char numBlocks);
 
 	/// Allocate one object
 	void* allocate();
-	
+
 	/// Deallocate one object
-	void deallocate(void *addr);	
+	void deallocate(void *addr);
 };
 
 #endif  // MEMORY_FIXEDALLOCATOR_H

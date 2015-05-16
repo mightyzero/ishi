@@ -17,6 +17,7 @@
 				"include_dirs":
 				[
 					"${project}/lib/SFML/include",
+					"${project}/include",
 					"${project}/src",
 					"${project}/test",
 					"${project}/test/include",

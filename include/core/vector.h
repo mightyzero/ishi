@@ -1,7 +1,7 @@
 #ifndef CORE_VECTOR_H
 #define CORE_VECTOR_H
 
-#include <core/Common.h>
+#include <core/common.h>
 
 /*=============================================================================+
  | Class Forward Declarations

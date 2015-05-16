@@ -1,7 +1,7 @@
 #ifndef CORE_POINT_H
 #define CORE_POINT_H
 
-#include <core/Common.h>
+#include <core/common.h>
 
 /**
 * Define the Point template class

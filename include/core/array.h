@@ -4,7 +4,7 @@
 #include <initializer_list> // std::initializer_list
 #include <array>            // std::array
 
-#include <core/Math.h>
+#include <core/math.h>
 
 /**
  * @brief   Template class functioning as a data holder.
@@ -91,7 +91,7 @@ public:
  +============================================================================*/
 #include <algorithm> // std::copy
 
-#include <core/Exceptions.h>
+#include <core/exceptions.h>
 
 template <typename T, uint... sizes>
 const std::array<T, Array<T, sizes...>::rank> Array<T, sizes...>::dims = {

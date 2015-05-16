@@ -2,7 +2,7 @@
 
 int main() {
 	sf::Window window(sf::VideoMode(800, 600), "nFlux");
-	
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -11,6 +11,6 @@ int main() {
 			}
 		}
 	}
-	
-	return 0;	
+
+	return 0;
 }

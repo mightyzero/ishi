@@ -1,7 +1,7 @@
 #ifndef CORE_MATRIX_H
 #define CORE_MATRIX_H
 
-#include <core/Tensor.h>
+#include <core/tensor.h>
 
 // #include <iostream>
 // #include <type_traits>  // enable_if

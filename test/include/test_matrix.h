@@ -2,7 +2,7 @@
 #define TESTMATRIX_H
 
 #include <gtest/gtest.h>
-#include <core/Matrix.h>
+#include <core/matrix.h>
 
 TEST(Matrix, DefaultConstructor) {
 	Matrix<int, 3, 3> m1;

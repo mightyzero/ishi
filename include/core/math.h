@@ -1,7 +1,7 @@
 #ifndef CORE_ARITHMETICS_H
 #define CORE_ARITHMETICS_H
 
-#include <core/Common.h>
+#include <core/common.h>
 
 /**
  * @brief   Compute the sum of arguments

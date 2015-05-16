@@ -77,7 +77,7 @@ endif (DO_COVERAGE)
 #--------------------------------#
 # Paths to Important Directories #
 #--------------------------------#
-set(INC_DIR  ${PROJECT_SOURCE_DIR}/src)
+set(INC_DIR  ${PROJECT_SOURCE_DIR}/include)
 set(SRC_DIR  ${PROJECT_SOURCE_DIR}/src)
 set(LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
 
@@ -100,9 +100,6 @@ add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
 # List Project Source Files #
 #---------------------------#
 set(SOURCES
-	${SRC_DIR}/core/Matrix.h
-	${SRC_DIR}/core/Point.h
-	${SRC_DIR}/core/Vector.h
 	${SRC_DIR}/main.cpp)
 
 #---------------#
@@ -112,7 +109,6 @@ set(EXEC nflux)
 
 include_directories(
 	${INC_DIR}
-	${INC_DIR}/core
 	${LIB_DIR}/SFML/include)
 add_executable(${EXEC} ${SOURCES})
 target_link_libraries(${EXEC} sfml-window	tga)

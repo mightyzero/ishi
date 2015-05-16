@@ -2,7 +2,7 @@
 #define TEST_TESTMATH_H
 
 #include <gtest/gtest.h>
-#include <core/Math.h>
+#include <core/math.h>
 
 TEST(sum, CorrectResult) {
 	EXPECT_EQ(1, sum(1));
