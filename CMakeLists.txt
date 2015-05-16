@@ -85,11 +85,6 @@ set(TEST_DIR     ${PROJECT_SOURCE_DIR}/test)
 set(TEST_LIB_DIR ${TEST_DIR}/lib)
 set(TEST_SRC_DIR ${TEST_DIR}/src)
 
-# Paths to external libraries include directories
-set(LIB_SFML_INCLUDE   ${LIB_DIR}/SFML/include)
-set(LIB_LTGA_INCLUDE   ${LIB_DIR}/libtga/src)
-set(LIB_GTEST_INCLUDE  ${TEST_DIR}/lib/gtest/include)
-
 #--------------------#
 # Build Dependencies #
 #--------------------#
@@ -118,7 +113,7 @@ set(EXEC nflux)
 include_directories(
 	${INC_DIR}
 	${INC_DIR}/core
-	${LIB_SFML_INCLUDE})
+	${LIB_DIR}/SFML/include)
 add_executable(${EXEC} ${SOURCES})
 target_link_libraries(${EXEC} sfml-window	tga)
 
@@ -126,7 +121,7 @@ target_link_libraries(${EXEC} sfml-window	tga)
 # List Test Source Files #
 #------------------------#
 set(TEST_SOURCE
-	${TEST_DIR}/TestAll.cpp)
+	${TEST_SRC_DIR}/main.cpp)
 
 #-------------#
 # Build Tests #
@@ -135,7 +130,7 @@ set(TEST_EXEC nflux_test)
 
 include_directories(
 	${INC_DIR}
-	${TEST_DIR}
+	${TEST_DIR}/include
 	${TEST_LIB_DIR}/gtest/include)
 add_subdirectory(${TEST_LIB_DIR}/gtest)
 add_executable(${TEST_EXEC} ${SOURCE} ${TEST_SOURCE})

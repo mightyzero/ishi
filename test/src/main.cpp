@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 
-#include <TestCommon.h>
-#include <TestMath.h>
-#include <TestArray.h>
-#include <TestMatrix.h>
+#include <test_common.h>
+#include <test_math.h>
+#include <test_array.h>
+#include <test_matrix.h>
+#include <test_zip.h>
 // #include <TestPoint.h>
 
 int main(int argc, char** argv) {
