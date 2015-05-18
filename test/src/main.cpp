@@ -5,7 +5,7 @@
 #include <test_array.h>
 #include <test_matrix.h>
 #include <test_zip.h>
-// #include <TestPoint.h>
+#include <test_point.h>
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

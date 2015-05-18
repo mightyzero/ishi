@@ -109,6 +109,7 @@ set(EXEC nflux)
 
 include_directories(
 	${INC_DIR}
+	${LIB_DIR}/eigen
 	${LIB_DIR}/SFML/include)
 add_executable(${EXEC} ${SOURCES})
 target_link_libraries(${EXEC} sfml-window	tga)

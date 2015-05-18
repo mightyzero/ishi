@@ -16,9 +16,9 @@
 				"extra_flags": "-std=c++11 -stdlib=libstdc++",
 				"include_dirs":
 				[
-					"${project}/lib/SFML/include",
 					"${project}/include",
-					"${project}/src",
+					"${project}/lib/eigen",
+					"${project}/lib/SFML/include",
 					"${project}/test",
 					"${project}/test/include",
 					"${project}/test/lib/gtest/include",

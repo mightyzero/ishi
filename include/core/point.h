@@ -1,59 +1,39 @@
 #ifndef CORE_POINT_H
 #define CORE_POINT_H
 
-#include <core/common.h>
+#include <Eigen/Dense>
 
-/**
-* Define the Point template class
-* \note The implementation must be in the header file. This is a requirement for
-*       all template classes.
-*/
-
-template <typename T, uint32_t D>
-class Point;
-
-template <typename T, uint32_t D>
-Point<T,D> operator+(const Point<T,D>& p1, const Point<T,D>& p2);
-
-template <typename T, uint32_t D>
-bool operator==(const Point<T,D>& p1, const Point<T,D>& p2);
-
-template <typename T, uint32_t D>
-bool operator!=(const Point<T,D>& p1, const Point<T,D>& p2);
-
-/***************************************************************************//**
- * \brief Parameterized class that defines a point in space
- *
- * \tparam T The precision of the scalar used to represent the point
- * \tparam D The number of dimensions of the space the point is in
- ******************************************************************************/
-template <typename T, uint32_t D>
-class Point {
-private:
-	// blitz::Array<T, 1> m_data;
-
+class Point : public Eigen::Vector3f {
 public:
-	// Constructors
-	Point();
-	Point(const Point& other);
-	template <typename... T2>
-	Point(const T2&... vals);
+	typedef Eigen::Vector3f Base;
 
-	T& x();
-	T& y();
-	T& z();
-	T& operator[](const uint32_t index);
+	/** Constructor using scalars. Double as the default constructor. */
+	Point(float x = 0, float y = 0, float z = 0) : Base(x, y, z) {}
 
-	/* Friend Declarations */
-	friend Point operator+<>(const Point& p1, const Point& p2);
+	/**
+	 * Copy constructor.
+	 *
+	 * Allows construction from Eigen expressions.
+	 */
+	template <typename T>
+	Point(const Eigen::MatrixBase<T>& other)
+	: Base(other) {}
 
-	friend bool operator==<>(const Point& p1, const Point& p2);
-	friend bool operator!=<>(const Point& p1, const Point& p2);
+	/**
+	 * Assignment operator.
+	 *
+	 * Allows assignment from Eigen expressions.
+	 */
+	template<typename T>
+	Point& operator=(const Eigen::MatrixBase<T>& other) {
+		Base::operator=(other);
+		return *this;
+	}
+
+	/* Get the first element. */
+	float& x() {
+		return Base::operator()(0);
+	}
 };
 
-// Include implementation of Point template class
-// Note: The implementation must be in the header file. This is a requirement
-//       for all template classes
-#include <core/PointImpl.cpp>
-
-#endif  // CORE_MATRIX_H
+#endif // CORE_POINT_H
