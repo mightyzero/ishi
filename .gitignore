@@ -42,3 +42,14 @@ cmake_install.cmake
 
 # Sublime temporary files
 *.sublime-workspace
+
+# IDEA IDE files
+.idea
+misc.xml
+modules.xml
+nflux.iml
+vcs.xml
+
+# CTags generated files
+.tags
+.tags_sorted_by_file
