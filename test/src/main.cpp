@@ -2,8 +2,6 @@
 
 #include <test_common.h>
 #include <test_math.h>
-#include <test_array.h>
-#include <test_matrix.h>
 #include <test_zip.h>
 #include <test_point.h>
 
