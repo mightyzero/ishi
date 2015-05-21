@@ -15,7 +15,7 @@
 # - Xrandr library     | required by SFML (UNIX systems)
 # - Freetype2 package  | required by SFML
 #==============================================================================#
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 
 #-----------------#
 # Project Details #
@@ -30,19 +30,14 @@ set(VERSION_PATCH 0)
 # Compiler and Linker Options #
 #-----------------------------#
 # Set compiler flags
-if (MSVC)
+if (${MSVC})
 	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "/Wall")
-else (MSVC)
-	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS}
-		"-g -O0 -w -Wall -Wextra -std=c++11"
-	)
-	set(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG}
-		"-g -O0 -w -Wall -Wextra -std=c++11"
-	# 	"-g -O0 -Wall -W -Wshadow -Wunused-variable -Wunused-parameter"
-	# 	"-Wunused-function -Wunused -Wno-system-headers -Wno-deprecated"
-	# 	"-Woverloaded-virtual -Wwrite-strings -Wextra -std=c++11"
-	)
-endif (MSVC)
+else()
+	add_compile_options(-g -O0 -std=c++11
+		-Wall -W -Wshadow -Wunused-variable -Wunused-parameter
+	 	-Wunused-function -Wunused -Wno-system-headers -Wno-deprecated
+	 	-Woverloaded-virtual -Wwrite-strings -Wextra)
+endif()
 
 #---------------#
 # Build Outputs #
