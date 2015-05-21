@@ -45,10 +45,6 @@ cmake_install.cmake
 
 # IDEA IDE files
 .idea
-misc.xml
-modules.xml
-nflux.iml
-vcs.xml
 
 # CTags generated files
 .tags
