@@ -29,11 +29,6 @@ public:
 		Base::operator=(other);
 		return *this;
 	}
-
-	/* Get the first element. */
-	float& x() {
-		return Base::operator()(0);
-	}
 };
 
 #endif // CORE_POINT_H
