@@ -62,7 +62,7 @@ constexpr T product(T arg1, Args... args) {
  * @return [description]
  */
 template <typename T, typename... Args>
-constexpr uint count(T arg1, Args... args) {
+constexpr uint count(T, Args...) {
 	return 1 + sizeof...(Args);
 }
 
@@ -92,4 +92,4 @@ constexpr bool neq(T1 arg1, T2 arg2) {
 	return !eq(arg1, arg2);
 }
 
-#endif // CORE_ARITHMETICS_H
+#endif //CORE_ARITHMETICS_H
