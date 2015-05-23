@@ -34,7 +34,7 @@ if (${MSVC})
 	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "/Wall")
 else()
 	add_compile_options(-g -O0 -std=c++11
-		-Wall -W -Wshadow -Wunused-variable -Wunused-parameter
+		-Wall -W -Wunused-variable -Wunused-parameter
 	 	-Wunused-function -Wunused -Wno-system-headers -Wno-deprecated
 	 	-Woverloaded-virtual -Wwrite-strings -Wextra)
 endif()
