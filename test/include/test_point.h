@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 #include <core/point.h>
+#include <core/vector.h>
 
 namespace nf {
 	/** Test default constructor returns origin. */
@@ -44,8 +45,22 @@ namespace nf {
 		EXPECT_TRUE((Point(4, 5, 6) == Point(4, 5, 6)));
 	}
 
+	/** Test index accessor returns point components. */
+	TEST(Point, IndexAccessor) {
+		Point p;
+		p = Point(5, 6);
+		EXPECT_FLOAT_EQ(p[0], 5);
+		EXPECT_FLOAT_EQ(p[1], 6);
+		EXPECT_FLOAT_EQ(p[2], 0);
+
+		p = Point(1, 2, 3);
+		EXPECT_FLOAT_EQ(p[0], 1);
+		EXPECT_FLOAT_EQ(p[1], 2);
+		EXPECT_FLOAT_EQ(p[2], 3);
+	}
+
 	/** Test that adding points together adds the respective components. */
-	TEST(Point, PointPointAddition) {
+	TEST(Point, AddPointToPoint) {
 		Point p1, p2, p;
 
 		p1 = Point(1, 2, 3);
@@ -66,20 +81,13 @@ namespace nf {
 		EXPECT_TRUE(((p1 + p2) == (p2 + p1)));
 	}
 
-	/** Test index accessor returns point components. */
-	TEST(Point, IndexAccessor) {
-		Point p;
-		p = Point(5, 6);
-		EXPECT_FLOAT_EQ(p[0], 5);
-		EXPECT_FLOAT_EQ(p[1], 6);
-		EXPECT_FLOAT_EQ(p[2], 0);
-
-		p = Point(1, 2, 3);
-		EXPECT_FLOAT_EQ(p[0], 1);
-		EXPECT_FLOAT_EQ(p[1], 2);
-		EXPECT_FLOAT_EQ(p[2], 3);
+	/** Test that adding vector to point produces new point. */
+	TEST(Point, AddVectorToPoint) {
+		Point p = Point(3, -4, 5) + Vector(1, -2, -3);
+		EXPECT_FLOAT_EQ(4, p.x());
+		EXPECT_FLOAT_EQ(-6, p.y());
+		EXPECT_FLOAT_EQ(2, p.z());
 	}
-
 }
 
 #endif // TESTPOINT_H
