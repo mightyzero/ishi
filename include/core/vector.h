@@ -11,19 +11,19 @@ namespace nf {
 		Vector() : Base() { }
 
 		/**
-	 * Copy constructor.
-	 *
-	 * Allows construction from Eigen expressions.
-	 */
+		 * Copy constructor.
+		 *
+		 * Allows construction from Eigen expressions.
+		 */
 		template<typename T>
 		Vector(const Eigen::MatrixBase <T> &other)
 				: Base(other) { }
 
 		/**
-	 * Assignment operator.
-	 *
-	 * Allows assignment from Eigen expressions.
-	 */
+		 * Assignment operator.
+		 *
+		 * Allows assignment from Eigen expressions.
+		 */
 		template<typename T>
 		Vector &operator=(const Eigen::MatrixBase <T> &other) {
 			Base::operator=(other);

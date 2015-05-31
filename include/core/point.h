@@ -13,19 +13,19 @@ namespace nf {
 		Point(float x = 0, float y = 0, float z = 0) : Base(x, y, z) { }
 
 		/**
-	 * Copy constructor.
-	 *
-	 * Allows construction from Eigen expressions.
-	 */
+		 * Copy constructor.
+		 *
+		 * Allows construction from Eigen expressions.
+		 */
 		template<typename T>
 		Point(const Eigen::MatrixBase<T> &other)
 				: Base(other) { }
 
 		/**
-	 * Assignment operator.
-	 *
-	 * Allows assignment from Eigen expressions.
-	 */
+		 * Assignment operator.
+		 *
+		 * Allows assignment from Eigen expressions.
+		 */
 		template<typename T>
 		Point &operator=(const Eigen::MatrixBase<T> &other) {
 			Base::operator=(other);
