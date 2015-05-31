@@ -6,9 +6,11 @@
 namespace nf {
 
 	class Vector : public Base {
+	public:
 		typedef Eigen::Vector3f Base;
 
-		Vector() : Base() { }
+		/** Constructor using scalars. Double as the default constructor. */
+		Vector(float x = 0, float y = 0, float z = 0) : Base(x, y, z) { }
 
 		/**
 		 * Copy constructor.
