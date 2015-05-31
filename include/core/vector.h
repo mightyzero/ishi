@@ -5,7 +5,7 @@
 
 namespace nf {
 
-	class Vector : public Base {
+	class Vector : public Eigen::Vector3f {
 	public:
 		typedef Eigen::Vector3f Base;
 
