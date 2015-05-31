@@ -5,51 +5,46 @@
 #include <core/point.h>
 
 namespace nf {
-	TEST(Point, Constructors) {
-		Point p;
-		// Default constructor returns origin
-		p = Point();
-		ASSERT_FLOAT_EQ(0, p.x());
-		ASSERT_FLOAT_EQ(0, p.y());
-		ASSERT_FLOAT_EQ(0, p.z());
-
-		// Two arg constructor returns point on 0-plane
-		for (float fx = -1.0f; fx < 1.0f; fx += 0.1f) {
-			for (float fy = -1.0f; fy < 1.0f; fy += 0.1f) {
-				p = Point(fx, fy);
-				ASSERT_FLOAT_EQ(fx, p.x());
-				ASSERT_FLOAT_EQ(fy, p.y());
-				ASSERT_FLOAT_EQ(0, p.z());
-			}
-		}
-
-		// Three arg constructor returns point in 3D space
-		for (float fx = -1.0f; fx < 1.0f; fx += 0.1f) {
-			for (float fy = -1.0f; fy < 1.0f; fy += 0.1f) {
-				for (float fz = -1.0f; fz < 1.0f; fz += 0.1f) {
-					p = Point(fx, fy, fz);
-					ASSERT_FLOAT_EQ(fx, p.x());
-					ASSERT_FLOAT_EQ(fy, p.y());
-					ASSERT_FLOAT_EQ(fz, p.z());
-				}
-			}
-		}
+	/** Test default constructor returns origin. */
+	TEST(Point, DefaultConstructor) {
+		Point p = Point();
+		EXPECT_FLOAT_EQ(0, p.x());
+		EXPECT_FLOAT_EQ(0, p.y());
+		EXPECT_FLOAT_EQ(0, p.z());
 	}
 
-	TEST(Point, Equality) {
+	/** Test two arg constructor returns point on 0-plane. */
+	TEST(Point, TwoArgConstructor) {
+		Point p = Point(3.6, -5.2);
+		EXPECT_FLOAT_EQ(3.6, p.x());
+		EXPECT_FLOAT_EQ(-5.2, p.y());
+		EXPECT_FLOAT_EQ(0, p.z());
+	}
+
+	/** Test three arg constructor returns point in 3D space. */
+	TEST(Point, ThreeArgConstructor) {
+		Point p = Point(3.6, -5.2, 7.4);
+		EXPECT_FLOAT_EQ(3.6, p.x());
+		EXPECT_FLOAT_EQ(-5.2, p.y());
+		EXPECT_FLOAT_EQ(7.4, p.z());
+	}
+
+	/** Test point equality comparison. */
+	TEST(Point, EqualityComparison) {
 		Point p;
 
 		p = Point(1, 0, 0);
-		ASSERT_TRUE((p == p));
-		ASSERT_TRUE((p == Point(1, 0, 0)));
-		ASSERT_TRUE((Point(1, 0, 0) == Point(1, 0, 0)));
+		EXPECT_TRUE((p == p));
+		EXPECT_TRUE((p == Point(1, 0, 0)));
+		EXPECT_TRUE((Point(1, 0, 0) == Point(1, 0, 0)));
 
 		p = Point(4, 5, 6);
-		ASSERT_TRUE((p == p));
-		ASSERT_TRUE((p == Point(4, 5, 6)));
-		ASSERT_TRUE((Point(4, 5, 6) == Point(4, 5, 6)));
+		EXPECT_TRUE((p == p));
+		EXPECT_TRUE((p == Point(4, 5, 6)));
+		EXPECT_TRUE((Point(4, 5, 6) == Point(4, 5, 6)));
 	}
 
+	/** Test that adding points together adds the respective components. */
 	TEST(Point, PointPointAddition) {
 		Point p1, p2, p;
 
@@ -58,30 +53,31 @@ namespace nf {
 
 		// Check addition identity
 		p = p1 + Point(0, 0, 0);
-		ASSERT_TRUE((p == Point(1, 2, 3)));
+		EXPECT_TRUE((p == Point(1, 2, 3)));
 
 		p = p2 + Point(0, 0, 0);
-		ASSERT_TRUE((p == Point(4, 5, 6)));
+		EXPECT_TRUE((p == Point(4, 5, 6)));
 
 		// Check result of addition
 		p = p1 + p2;
-		ASSERT_TRUE((p == Point(5, 7, 9)));
+		EXPECT_TRUE((p == Point(5, 7, 9)));
 
 		// Check addition is commutative
-		ASSERT_TRUE(((p1 + p2) == (p2 + p1)));
+		EXPECT_TRUE(((p1 + p2) == (p2 + p1)));
 	}
 
+	/** Test index accessor returns point components. */
 	TEST(Point, IndexAccessor) {
 		Point p;
 		p = Point(5, 6);
-		ASSERT_FLOAT_EQ(p[0], 5);
-		ASSERT_FLOAT_EQ(p[1], 6);
-		ASSERT_FLOAT_EQ(p[2], 0);
+		EXPECT_FLOAT_EQ(p[0], 5);
+		EXPECT_FLOAT_EQ(p[1], 6);
+		EXPECT_FLOAT_EQ(p[2], 0);
 
 		p = Point(1, 2, 3);
-		ASSERT_FLOAT_EQ(p[0], 1);
-		ASSERT_FLOAT_EQ(p[1], 2);
-		ASSERT_FLOAT_EQ(p[2], 3);
+		EXPECT_FLOAT_EQ(p[0], 1);
+		EXPECT_FLOAT_EQ(p[1], 2);
+		EXPECT_FLOAT_EQ(p[2], 3);
 	}
 
 }
