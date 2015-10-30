@@ -9,3 +9,29 @@ script:
   - ./configure
   - make
   - make test
+addons:
+  coverity_scan:
+
+    # GitHub project metadata
+    project:
+      name: mightyzero/ishi
+      version: 0.0.1
+      description: Ishi
+
+    # Where email notification of build analysis results will be sent
+    notification_email: minh.pham@utexas.edu
+
+    # Commands to prepare for build_command
+    build_command_prepend:
+      - mkdir target
+      - cd target
+      - cmake ../
+      - ./configure
+
+    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+    build_command: make
+
+    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
+    # Take care in resource usage, and consider the build frequency allowances per
+    #   https://scan.coverity.com/faq#frequency
+    branch_pattern: develop
