@@ -1,7 +1,7 @@
 #==============================================================================#
 # Minh Pham - Copyright 2014 - All rights reserved.
 #
-# Project: nFlux
+# Project: ishi
 # Dependencies:
 # - SFML               | required by project
 # - GLEW               | required by project
@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 2.8)
 #-----------------#
 # Project Details #
 #-----------------#
-project(nFlux)
+project(ishi)
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
@@ -105,7 +105,7 @@ set(SOURCES
 #---------------#
 # Build Project #
 #---------------#
-set(EXEC nflux)
+set(EXEC ishi)
 
 include_directories(
 	${INC_DIR}
@@ -122,7 +122,7 @@ set(TEST_SOURCE
 #-------------#
 # Build Tests #
 #-------------#
-set(TEST_EXEC nflux_test)
+set(TEST_EXEC ishi_test)
 
 include_directories(
 	${INC_DIR}
