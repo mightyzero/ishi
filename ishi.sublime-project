@@ -71,7 +71,7 @@
 	],
 	"settings":
 	{
-		"sublimegdb_commandline": "gdb --interpreter=mi nflux",
+		"sublimegdb_commandline": "gdb --interpreter=mi ishi",
 		"sublimegdb_workingdir": "build"
 	}
 }

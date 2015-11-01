@@ -1,26 +1,20 @@
 #==============================================================================#
 # Minh Pham - Copyright 2014 - All rights reserved.
 #
-# Project: nFlux
+# Project: ishi
 # Dependencies:
-# - SFML               | required by project
 # - GLEW               | required by project
 # - TGA library        | required by project
 # - Doxygen executable | optional by project
 # - OpenGL library     | required by SFML, GLEW
 # - GLU library        | required by GLEW
-# - JPEG library       | required by SFML
-# - OpenAL library     | required by SFML
-# - SNDFile library    | required by SFML
-# - Xrandr library     | required by SFML (UNIX systems)
-# - Freetype2 package  | required by SFML
 #==============================================================================#
 cmake_minimum_required(VERSION 2.8.12)
 
 #-----------------#
 # Project Details #
 #-----------------#
-project(nFlux)
+project(ishi)
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
@@ -87,7 +81,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # set(BUILD_SHARED_LIBS False)
 
-add_subdirectory(${LIB_DIR}/SFML)      # Build SFML
 add_subdirectory(${LIB_DIR}/GLEW)      # Build GLEW
 add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
 
@@ -100,14 +93,14 @@ set(SOURCES
 #---------------#
 # Build Project #
 #---------------#
-set(EXEC nflux)
+set(EXEC ishi)
 
 include_directories(
 	${INC_DIR}
 	${LIB_DIR}/eigen
-	${LIB_DIR}/SFML/include)
+)
 add_executable(${EXEC} ${SOURCES})
-target_link_libraries(${EXEC} sfml-window	tga)
+target_link_libraries(${EXEC} tga)
 
 #------------------------#
 # List Test Source Files #
@@ -118,7 +111,7 @@ set(TEST_SOURCE
 #-------------#
 # Build Tests #
 #-------------#
-set(TEST_EXEC nflux_test)
+set(TEST_EXEC ishi_test)
 
 include_directories(
 	${INC_DIR}
