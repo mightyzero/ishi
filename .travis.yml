@@ -10,7 +10,6 @@ script:
   - mkdir target
   - cd target
   - cmake ../
-  - ./configure
   - make
   - make test
 addons:
