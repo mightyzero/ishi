@@ -1,10 +1,4 @@
-#include <gtest/gtest.h>
+// This tells Catch to provide a main() - only do this in one cpp file
+#define CATCH_CONFIG_MAIN
 
-#include <test_common.h>
-#include <test_math.h>
-#include <test_point.h>
-
-int main(int argc, char** argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
+#include <catch/catch.hpp>

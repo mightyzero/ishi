@@ -72,7 +72,7 @@ set(LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
 
 set(TEST_DIR     ${PROJECT_SOURCE_DIR}/src/test)
 set(TEST_LIB_DIR ${PROJECT_SOURCE_DIR}/lib/test)
-set(TEST_SRC_DIR ${TEST_DIR}/cpp)
+set(TEST_SRC_DIR ${PROJECT_SOURCE_DIR}/src/test/cpp)
 
 #--------------------#
 # Build Dependencies #
@@ -106,7 +106,10 @@ target_link_libraries(${EXEC} tga)
 # List Test Source Files #
 #------------------------#
 set(TEST_SOURCE
-	${TEST_SRC_DIR}/main.cpp)
+	${TEST_SRC_DIR}/main.cpp
+	${TEST_SRC_DIR}/core/test_math.cpp
+	${TEST_SRC_DIR}/core/test_point.cpp
+)
 
 #-------------#
 # Build Tests #
@@ -116,6 +119,7 @@ set(TEST_EXEC ishi_test)
 include_directories(
 	${INC_DIR}
 	${TEST_DIR}/include
+	${TEST_LIB_DIR}
 	${TEST_LIB_DIR}/gtest/include)
 add_subdirectory(${TEST_LIB_DIR}/gtest)
 add_executable(${TEST_EXEC} ${SOURCE} ${TEST_SOURCE})
