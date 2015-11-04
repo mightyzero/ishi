@@ -71,7 +71,7 @@ set(SRC_DIR  ${PROJECT_SOURCE_DIR}/src/main/cpp)
 set(LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
 
 set(TEST_DIR     ${PROJECT_SOURCE_DIR}/src/test)
-set(TEST_LIB_DIR ${TEST_DIR}/lib)
+set(TEST_LIB_DIR ${PROJECT_SOURCE_DIR}/lib/test)
 set(TEST_SRC_DIR ${TEST_DIR}/cpp)
 
 #--------------------#
