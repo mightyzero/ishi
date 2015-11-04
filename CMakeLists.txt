@@ -66,13 +66,13 @@ endif (DO_COVERAGE)
 #--------------------------------#
 # Paths to Important Directories #
 #--------------------------------#
-set(INC_DIR  ${PROJECT_SOURCE_DIR}/include)
-set(SRC_DIR  ${PROJECT_SOURCE_DIR}/src)
+set(INC_DIR  ${PROJECT_SOURCE_DIR}/src/main/include)
+set(SRC_DIR  ${PROJECT_SOURCE_DIR}/src/main/cpp)
 set(LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
 
-set(TEST_DIR     ${PROJECT_SOURCE_DIR}/test)
+set(TEST_DIR     ${PROJECT_SOURCE_DIR}/src/test)
 set(TEST_LIB_DIR ${TEST_DIR}/lib)
-set(TEST_SRC_DIR ${TEST_DIR}/src)
+set(TEST_SRC_DIR ${TEST_DIR}/cpp)
 
 #--------------------#
 # Build Dependencies #
