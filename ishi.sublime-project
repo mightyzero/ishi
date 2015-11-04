@@ -16,12 +16,13 @@
 				"extra_flags": "-std=c++11 -stdlib=libstdc++",
 				"include_dirs":
 				[
-					"${project}/include",
+					"${project}/src/main/include",
 					"${project}/lib/eigen",
 					"${project}/lib/SFML/include",
-					"${project}/test",
-					"${project}/test/include",
-					"${project}/test/lib/gtest/include",
+					"${project}/src/test",
+					"${project}/src/test/include",
+					"${project}/lib/test/gtest/include",
+					"${project}/lib/test",
 					"/usr/include/c++/4.8",
 					"/usr/include/c++/4.8/backward",
 					"/usr/include/x86_64-linux-gnu/c++/4.8",
