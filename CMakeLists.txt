@@ -20,34 +20,29 @@ set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
 set(VERSION_PATCH 0)
 
-#-----------------------------#
-# Compiler and Linker Options #
-#-----------------------------#
-# Set compiler flags
-if (${MSVC})
-	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "/Wall")
-else()
-	add_compile_options(-g -O0 -std=c++11
-		-Wall -W -Wunused-variable -Wunused-parameter
-	 	-Wunused-function -Wunused -Wno-system-headers -Wno-deprecated
-	 	-Woverloaded-virtual -Wwrite-strings -Wextra)
+#-------------------------#
+# Configure Build Options #
+#-------------------------#
+# Build to Debug target by default
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-#---------------#
-# Build Outputs #
-#---------------#
-# First for the generic no-config case (e.g. with mingw)
+# Set build outputs for the generic no-config case (e.g. with mingw)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# Second, for multi-config builds (e.g. msvc)
+# Set build outputs for multi-config builds (e.g. msvc)
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 	string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR})
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/lib)
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/lib)
 endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
+
+# Set compilation flags
+set(DEBUG_FLAGS -g -O0 -std=c++11 -Wall -Wunused -Wno-system-headers -Wno-deprecated -Woverloaded-virtual -Wextra)
 
 #------------------------------------------------------------------------------#
 # Configure Code Coverage Options                                              #
@@ -100,6 +95,9 @@ include_directories(
 	${LIB_DIR}/eigen
 )
 add_executable(${EXEC} ${SOURCES})
+target_compile_options(${EXEC}
+	PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>"
+)
 target_link_libraries(${EXEC} tga)
 
 #------------------------#
@@ -124,6 +122,7 @@ include_directories(
 add_subdirectory(${TEST_LIB_DIR}/gtest)
 add_executable(${TEST_EXEC} ${SOURCE} ${TEST_SOURCE})
 target_link_libraries(${TEST_EXEC} gtest)
+target_compile_options(${TEST_EXEC} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
 
 enable_testing()
 add_test(unittest ${TEST_EXEC})
