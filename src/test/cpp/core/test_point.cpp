@@ -2,7 +2,7 @@
 #include <core/point.h>
 #include <core/vector.h>
 
-namespace nf {
+namespace ishi {
 	TEST_CASE("Default constructor should return origin") {
 		Point p = Point();
 		CHECK(p.x() == 0);

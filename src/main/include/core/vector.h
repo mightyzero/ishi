@@ -3,7 +3,7 @@
 
 #include <Eigen/Dense>
 
-namespace nf {
+namespace ishi {
 
 	class Vector : public Eigen::Vector3f {
 	public:

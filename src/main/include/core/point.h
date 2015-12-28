@@ -3,7 +3,7 @@
 
 #include <Eigen/Dense>
 
-namespace nf {
+namespace ishi {
 
 	class Point : public Eigen::Vector3f {
 	public:
