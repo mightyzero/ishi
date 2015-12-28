@@ -1,11 +1,11 @@
-#include <memory/Chunk.h>
-#include <memory/FixedAllocator.h>
+#include <memory/chunk.h>
+#include <memory/fixed_allocator.h>
 
 FixedAllocator::FixedAllocator(size_t blockSize, unsigned char numBlocks)
-	: m_blockSize = blockSize,
-	  m_numBlocks = numBlocks,
-	  m_allocChunk = NULL,
-	  m_deallocChunk = NULL
+	: m_blockSize(blockSize),
+	  m_numBlocks(numBlocks),
+	  m_allocChunk(NULL),
+	  m_deallocChunk(NULL)
 {}
 
 void* FixedAllocator::allocate() {
@@ -23,7 +23,7 @@ void* FixedAllocator::allocate() {
 				// Reached end of list: no empty chunk -> allocate new one
 				// TODO: should we reserve(size()+1)?
 				Chunk newChunk;
-				newChunk.Init(m_blockSize, m_numBlocks);
+				newChunk.init(m_blockSize, m_numBlocks);
 				m_chunks.push_back(newChunk);  // save copy into back of chunks
 				
 				// Update pointer to object at back of chunks (not stack object)
@@ -35,9 +35,9 @@ void* FixedAllocator::allocate() {
 		}
 		
 		// Sanity checks
-		ASSERT(allocChunk != NULL);             // Null pointer check
-		ASSERT(allocChunk->numFreeBlocks > 0);  // Available space check
-		return allocChunk->alloc(m_blockSize);
+		ASSERT(m_allocChunk != NULL);             // Null pointer check
+		ASSERT(m_allocChunk->numFreeBlocks > 0);  // Available space check
+		return m_allocChunk->alloc(m_blockSize);
 	}
 	
 }

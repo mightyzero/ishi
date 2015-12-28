@@ -79,11 +79,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 add_subdirectory(${LIB_DIR}/GLEW)      # Build GLEW
 add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
 
-#---------------------------#
-# List Project Source Files #
-#---------------------------#
-set(SOURCES
-	${SRC_DIR}/main.cpp)
+# Project source files are all cpp files under SRC_DIR.
+# Note: CMake needs to be re-run when a new source file is added.
+file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp")
 
 #---------------#
 # Build Project #
@@ -94,20 +92,15 @@ include_directories(
 	${INC_DIR}
 	${LIB_DIR}/eigen
 )
-add_executable(${EXEC} ${SOURCES})
+add_executable(${EXEC} ${SOURCE})
 target_compile_options(${EXEC}
 	PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>"
 )
 target_link_libraries(${EXEC} tga)
 
-#------------------------#
-# List Test Source Files #
-#------------------------#
-set(TEST_SOURCE
-	${TEST_SRC_DIR}/main.cpp
-	${TEST_SRC_DIR}/core/test_math.cpp
-	${TEST_SRC_DIR}/core/test_point.cpp
-)
+# Test source files are all cpp files under SRC_DIR.
+# Note: CMake needs to be re-run when a new test source file is added.
+file(GLOB_RECURSE TEST_SOURCE "${TEST_SRC_DIR}/*.cpp")
 
 #-------------#
 # Build Tests #

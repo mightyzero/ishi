@@ -1,5 +1,5 @@
-#include <core/Common.h>
-#include <memory/Chunk.h>
+#include <core/common.h>
+#include <memory/chunk.h>
 
 void Chunk::init(size_t blockSize, unsigned char numBlocks) {
 	ASSERT(blockSize > 0);
@@ -24,7 +24,7 @@ void* Chunk::alloc(size_t blockSize) {
 		return NULL;
 	
 	--numFreeBlocks;
-	unsigned char pResult = pData + (blockSize * firstFreeBlock);
+	unsigned char* pResult = pData + (blockSize * firstFreeBlock);
 	// index of next free block: first byte of current block
 	firstFreeBlock = *pResult;
 	

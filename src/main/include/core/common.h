@@ -1,6 +1,7 @@
 #ifndef CORE_COMMON_H
 #define CORE_COMMON_H
 
+#include <stddef.h>
 #include <stdint.h> // *int*_t
 #include <assert.h> // assert
 
