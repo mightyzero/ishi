@@ -86,17 +86,17 @@ file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp")
 #---------------#
 # Build Project #
 #---------------#
-set(EXEC ishi)
+set(MAIN ishi)
 
 include_directories(
 	${INC_DIR}
 	${LIB_DIR}/eigen
 )
-add_executable(${EXEC} ${SOURCE})
-target_compile_options(${EXEC}
+add_library(${MAIN} ${SOURCE})
+target_compile_options(${MAIN}
 	PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>"
 )
-target_link_libraries(${EXEC} tga)
+target_link_libraries(${MAIN} tga)
 
 # Test source files are all cpp files under SRC_DIR.
 # Note: CMake needs to be re-run when a new test source file is added.
@@ -105,20 +105,18 @@ file(GLOB_RECURSE TEST_SOURCE "${TEST_SRC_DIR}/*.cpp")
 #-------------#
 # Build Tests #
 #-------------#
-set(TEST_EXEC ishi_test)
+set(TEST_MAIN ishi_test)
 
 include_directories(
 	${INC_DIR}
 	${TEST_DIR}/include
-	${TEST_LIB_DIR}
-	${TEST_LIB_DIR}/gtest/include)
-add_subdirectory(${TEST_LIB_DIR}/gtest)
-add_executable(${TEST_EXEC} ${SOURCE} ${TEST_SOURCE})
-target_link_libraries(${TEST_EXEC} gtest)
-target_compile_options(${TEST_EXEC} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
+	${TEST_LIB_DIR})
+
+add_executable(${TEST_MAIN} ${SOURCE} ${TEST_SOURCE})
+target_compile_options(${TEST_MAIN} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
 
 enable_testing()
-add_test(unittest ${TEST_EXEC})
+add_test(unittest ${TEST_MAIN})
 
 #------------------------#
 # Generate Documentation #
