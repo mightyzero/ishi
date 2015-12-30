@@ -88,10 +88,7 @@ file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp")
 #---------------#
 set(MAIN ishi)
 
-include_directories(
-	${INC_DIR}
-	${LIB_DIR}/eigen
-)
+include_directories(${INC_DIR})
 add_library(${MAIN} ${SOURCE})
 target_compile_options(${MAIN}
 	PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>"
