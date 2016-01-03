@@ -115,26 +115,6 @@ public:
 		return *this;
 	}
 
-	/** Access the first element in the vector, if it exists. */
-	ScalarT &x() {
-		return m_data.at(0);
-	}
-
-	/** Access the second element in the vector, if it exists. */
-	ScalarT &y() {
-		return m_data.at(1);
-	}
-
-	/** Access the third element in the vector, if it exists. */
-	ScalarT &z() {
-		return m_data.at(2);
-	}
-
-	/** Access the fourth element in the vector, if it exists. */
-	ScalarT &w() {
-		return m_data.at(3);
-	}
-
 	/** Index operator. */
 	ScalarT &operator[](size_t index) {
 		return m_data[index];

@@ -24,22 +24,22 @@ public:
 
 	/** Access the first element in the vector. */
 	ScalarT& x() {
-		return m_impl->x();
+		return operator[](0);
 	}
 
 	/** Access the second element in the vector. */
 	ScalarT& y() {
-		return m_impl->y();
+		return operator[](1);
 	}
 
 	/** Access the third element in the vector, if it exists. */
 	ScalarT& z() {
-		return m_impl->z();
+		return operator[](2);
 	};
 
 	/** Access the fourth element in the vector, if it exists. */
 	ScalarT& w() {
-		return m_impl->w();
+		return operator[](3);
 	}
 
 	/** Index operator. */
