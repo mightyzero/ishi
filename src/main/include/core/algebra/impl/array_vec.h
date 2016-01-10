@@ -10,25 +10,25 @@ namespace ishi {
 
 // Forward declaration
 template <typename ScalarT, size_t length>
-class ArrayVec;
+class ArrayVecImpl;
 
 /**
- * Specialization of VecTrait for ArrayVec.
+ * Specialization of VecTrait for ArrayVecImpl.
  */
 template <typename ScalarT, size_t length>
-struct VecTrait<ArrayVec<ScalarT, length>> {
+struct VecTrait<ArrayVecImpl<ScalarT, length>> {
 	typedef ScalarT type;
 };
 
 // Forward declaration of friend method swap
 template <typename ScalarT, size_t length>
-void swap(ArrayVec<ScalarT, length> &lhs, ArrayVec<ScalarT, length> &rhs);
+void swap(ArrayVecImpl<ScalarT, length> &lhs, ArrayVecImpl<ScalarT, length> &rhs);
 
 /**
  * Addition operator.
  */
 template <typename ScalarT, size_t length>
-ArrayVec<ScalarT, length> operator+(ArrayVec<ScalarT, length> lhs, const ArrayVec<ScalarT, length>& rhs) {
+ArrayVecImpl<ScalarT, length> operator+(ArrayVecImpl<ScalarT, length> lhs, const ArrayVecImpl<ScalarT, length>& rhs) {
 	lhs += rhs;
 	return lhs;
 }
@@ -37,7 +37,7 @@ ArrayVec<ScalarT, length> operator+(ArrayVec<ScalarT, length> lhs, const ArrayVe
  * Subtraction operator.
  */
 template<typename ScalarT, size_t length>
-ArrayVec<ScalarT, length> operator-(ArrayVec<ScalarT, length> lhs, const ArrayVec<ScalarT, length>& rhs) {
+ArrayVecImpl<ScalarT, length> operator-(ArrayVecImpl<ScalarT, length> lhs, const ArrayVecImpl<ScalarT, length>& rhs) {
 	lhs -= rhs;
 	return lhs;
 }
@@ -46,7 +46,7 @@ ArrayVec<ScalarT, length> operator-(ArrayVec<ScalarT, length> lhs, const ArrayVe
  * Multiplication operator.
  */
 template<typename ScalarT, size_t length>
-ArrayVec<ScalarT, length> operator*(ArrayVec<ScalarT, length> lhs, ScalarT scalar) {
+ArrayVecImpl<ScalarT, length> operator*(ArrayVecImpl<ScalarT, length> lhs, ScalarT scalar) {
 	lhs *= scalar;
 	return lhs;
 }
@@ -55,7 +55,7 @@ ArrayVec<ScalarT, length> operator*(ArrayVec<ScalarT, length> lhs, ScalarT scala
  * Multiplication operator.
  */
 template<typename ScalarT, size_t length>
-ArrayVec<ScalarT, length> operator*(ScalarT scalar, ArrayVec<ScalarT, length> rhs) {
+ArrayVecImpl<ScalarT, length> operator*(ScalarT scalar, ArrayVecImpl<ScalarT, length> rhs) {
 	return rhs * scalar;
 }
 
@@ -63,7 +63,7 @@ ArrayVec<ScalarT, length> operator*(ScalarT scalar, ArrayVec<ScalarT, length> rh
  * Division operator.
  */
 template<typename ScalarT, size_t length>
-ArrayVec<ScalarT, length> operator/(ArrayVec<ScalarT, length> lhs, ScalarT scale) {
+ArrayVecImpl<ScalarT, length> operator/(ArrayVecImpl<ScalarT, length> lhs, ScalarT scale) {
 	lhs /= scale;
 	return lhs;
 }
@@ -72,35 +72,35 @@ ArrayVec<ScalarT, length> operator/(ArrayVec<ScalarT, length> lhs, ScalarT scale
  * Implementation of Vec using std::array as backing data store.
  */
 template <typename ScalarT, size_t length>
-class ArrayVec : public Vec<ArrayVec<ScalarT, length>> {
+class ArrayVecImpl {
 public:
-	typedef typename VecTrait<ArrayVec>::type value_type;
+	typedef typename VecTrait<ArrayVecImpl>::type value_type;
 
 private:
 	std::array<ScalarT, length> m_data;
 
 public:
-	friend void swap(ArrayVec &lhs, ArrayVec &rhs) {
+	friend void swap(ArrayVecImpl &lhs, ArrayVecImpl &rhs) {
 		std::swap(lhs.m_data, rhs.m_data);
 	}
 
 public:
 	/** Default constructor. */
-	ArrayVec() {
+	ArrayVecImpl() {
 		m_data.fill(0);
 	}
 
 	/** Constructor from variable scalars. */
 	template <typename... ScalarTs>
-	ArrayVec(ScalarT first, ScalarTs... rest) {
+	ArrayVecImpl(ScalarT first, ScalarTs... rest) {
 		m_data = {{first, rest...}};
 	}
 
 	/** Copy constructor. */
-	ArrayVec(const ArrayVec &that) : m_data(that.m_data) { }
+	ArrayVecImpl(const ArrayVecImpl &that) : m_data(that.m_data) { }
 
 	/** Move constructor. */
-	ArrayVec(ArrayVec &&that) : ArrayVec() {
+	ArrayVecImpl(ArrayVecImpl &&that) : ArrayVecImpl() {
 		swap(*this, that);
 	}
 
@@ -110,7 +110,7 @@ public:
 	 * This method is implemented using the copy-and-swap idiom. See:
 	 * http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
 	 */
-	ArrayVec &operator=(ArrayVec that) {
+	ArrayVecImpl &operator=(ArrayVecImpl that) {
 		swap(*this, that);
 		return *this;
 	}
@@ -126,7 +126,7 @@ public:
 	}
 
 	/** Compound addition operator. */
-	ArrayVec &operator+=(const Vec<ArrayVec> &that) {
+	ArrayVecImpl &operator+=(const ArrayVecImpl &that) {
 		for (size_t i = 0; i < length; ++i) {
 			m_data[i] += that[i];
 		}
@@ -134,7 +134,7 @@ public:
 	}
 
 	/** Compound subtraction operator. */
-	ArrayVec &operator-=(const Vec<ArrayVec> &that) {
+	ArrayVecImpl &operator-=(const ArrayVecImpl &that) {
 		for (size_t i = 0; i < length; ++i) {
 			m_data[i] -= that[i];
 		}
@@ -142,7 +142,7 @@ public:
 	}
 
 	/** Compound multiplication operator. */
-	ArrayVec &operator*=(ScalarT scalar) {
+	ArrayVecImpl &operator*=(ScalarT scalar) {
 		for (size_t i = 0; i < length; ++i) {
 			m_data[i] *= scalar;
 		}
@@ -150,7 +150,7 @@ public:
 	}
 
 	/** Compound division operator. */
-	ArrayVec &operator/=(ScalarT scalar) {
+	ArrayVecImpl &operator/=(ScalarT scalar) {
 		for (size_t i = 0; i < length; ++i) {
 			m_data[i] /= scalar;
 		}
@@ -158,6 +158,9 @@ public:
 	}
 };
 
-}
+template<typename ScalarT, size_t length>
+using ArrayVec = Vec<ScalarT, length, ArrayVecImpl>;
+
+}  //namespace ishi
 
 #endif //CORE_ALGEBRA_ARRAY_VEC_H

@@ -6,54 +6,135 @@
 
 namespace ishi {
 
+template<typename ScalarT, size_t length, template<typename, size_t> class ImplT>
+class Vec;
+
+/** Add two vectors. */
+template<typename S, size_t l, template<typename, size_t> class T1, template<typename, size_t> class T2>
+auto operator+(const Vec<S, l, T1> &x, const Vec<S, l, T2> &y) -> decltype(x.data() + y.data()) {
+	return x.data() + y.data();
+}
+
+/** Add a vector to something else. */
+template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+auto operator+(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() + y) {
+	return x.data() + y;
+}
+
+template<typename S, size_t l, typename T1, template<typename, size_t> class T2>
+auto operator+(const T1 &x, const Vec<S, l, T2> &y) -> decltype(x + y.data()) {
+	return x + y.data();
+}
+
+template<typename S, size_t l, template<typename, size_t> class T1, template<typename, size_t> class T2>
+auto operator-(const Vec<S, l, T1> &x, const Vec<S, l, T2> &y) -> decltype(x.data() - y.data()) {
+	return x.data() - y.data();
+}
+
+template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+auto operator-(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() - y) {
+	return x.data() - y;
+}
+
+template<typename S, size_t l, typename T1, template<typename, size_t> class T2>
+auto operator-(const T1 &x, const Vec<S, l, T2> &y) -> decltype(x - y.data()) {
+	return x - y.data();
+}
+
+/** Multiply vector by scalar. */
+template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+auto operator*(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() * y) {
+	return x.data() * y;
+}
+
+template<typename S, size_t l, typename T1, template<typename, size_t> class T2>
+auto operator*(const T1 &x, const Vec<S, l, T2> &y) -> decltype(x * y.data()) {
+	return x * y.data();
+}
+
+/** Divide vector by scalar. */
+template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+auto operator/(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() * y) {
+	return x.data() / y;
+}
+
 /**
  * The abstract interface for a linear algebra vector.
  *
  * Classes implementing this abstract interface support value semantics. Overridden methods should be declared final.
  */
-template<typename ImplT>
+template<typename ScalarT, size_t length, template<typename, size_t> class ImplT>
 class Vec {
 public:
-	typedef typename VecTrait<ImplT>::type ScalarT;
+	typedef ImplT<ScalarT, length> DataT;
+
+//	typedef typename VecTrait<ImplT>::type ScalarT;
 
 private:
-	ImplT* m_impl;
+	DataT m_data;
 
 public:
-	Vec() : m_impl(static_cast<ImplT*>(this)) {}
+	Vec() : m_data() {}
+
+	/** Implicit conversion operator. */
+	operator DataT() const { return m_data; }
+
+	/** Constructor from variable scalars. */
+	template <typename... ScalarTs>
+	Vec(ScalarT first, ScalarTs... rest) : m_data(first, rest...) {}
+
+	Vec(const DataT& impl) : m_data(impl) {}
 
 	/** Access the first element in the vector. */
-	ScalarT& x() {
-		return operator[](0);
-	}
+	ScalarT& x() { return operator[](0); }
 
 	/** Access the second element in the vector. */
-	ScalarT& y() {
-		return operator[](1);
-	}
+	ScalarT& y() { return operator[](1); }
 
 	/** Access the third element in the vector, if it exists. */
-	ScalarT& z() {
-		return operator[](2);
-	};
+	ScalarT& z() { return operator[](2); };
 
 	/** Access the fourth element in the vector, if it exists. */
-	ScalarT& w() {
-		return operator[](3);
-	}
+	ScalarT& w() { return operator[](3); }
 
 	/** Index operator. */
-	ScalarT& operator[](size_t index) {
-		return m_impl->operator[](index);
-	}
+	ScalarT& operator[](size_t index) { return m_data[index]; }
 
 	/** Const index operator. */
-	ScalarT operator[](size_t index) const {
-		return m_impl->operator[](index);
+	ScalarT operator[](size_t index) const { return m_data[index]; }
+
+	template <typename T>
+	Vec& operator+=(const T &that) {
+		m_data+= that;
+		return *this;
 	}
 
-	Vec& operator+=(const Vec &that) {
-		return m_impl->operator+=(that);
+	template <typename T>
+	Vec& operator-=(const T &that) {
+		m_data-=(that);
+		return *this;
+	}
+
+	template <typename T>
+	Vec& operator*=(const T &that) {
+		m_data *= that;
+		return *this;
+	}
+
+	template <typename T>
+	Vec& operator/=(const T &that) {
+		m_data /= that;
+		return *this;
+	}
+
+	template <typename T>
+	const Vec& operator=(const T & X) {
+		m_data = X;
+		return *this;
+	}
+
+	ImplT<ScalarT, length> data() const {
+		return m_data;
 	}
 
 };
