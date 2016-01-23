@@ -1,3 +1,6 @@
 [submodule "lib/test/igloo"]
 	path = lib/test/igloo
 	url = https://github.com/joakimkarlsson/igloo
+[submodule "lib/main/blitz"]
+	path = lib/main/blitz
+	url = https://github.com/mightyzero/blitz.git
