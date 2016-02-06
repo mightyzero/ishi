@@ -6,54 +6,54 @@
 
 namespace ishi {
 
-template<typename ScalarT, size_t length, template<typename, size_t> class ImplT>
+template<typename ScalarT, int length, template<typename, int> class ImplT>
 class Vec;
 
 /** Add two vectors. */
-template<typename S, size_t l, template<typename, size_t> class T1, template<typename, size_t> class T2>
+template<typename S, int l, template<typename, int> class T1, template<typename, int> class T2>
 auto operator+(const Vec<S, l, T1> &x, const Vec<S, l, T2> &y) -> decltype(x.data() + y.data()) {
 	return x.data() + y.data();
 }
 
 /** Add a vector to something else. */
-template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+template<typename S, int l, template<typename, int> class T1, typename T2>
 auto operator+(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() + y) {
 	return x.data() + y;
 }
 
-template<typename S, size_t l, typename T1, template<typename, size_t> class T2>
+template<typename S, int l, typename T1, template<typename, int> class T2>
 auto operator+(const T1 &x, const Vec<S, l, T2> &y) -> decltype(x + y.data()) {
 	return x + y.data();
 }
 
-template<typename S, size_t l, template<typename, size_t> class T1, template<typename, size_t> class T2>
+template<typename S, int l, template<typename, int> class T1, template<typename, int> class T2>
 auto operator-(const Vec<S, l, T1> &x, const Vec<S, l, T2> &y) -> decltype(x.data() - y.data()) {
 	return x.data() - y.data();
 }
 
-template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+template<typename S, int l, template<typename, int> class T1, typename T2>
 auto operator-(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() - y) {
 	return x.data() - y;
 }
 
-template<typename S, size_t l, typename T1, template<typename, size_t> class T2>
+template<typename S, int l, typename T1, template<typename, int> class T2>
 auto operator-(const T1 &x, const Vec<S, l, T2> &y) -> decltype(x - y.data()) {
 	return x - y.data();
 }
 
 /** Multiply vector by scalar. */
-template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+template<typename S, int l, template<typename, int> class T1, typename T2>
 auto operator*(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() * y) {
 	return x.data() * y;
 }
 
-template<typename S, size_t l, typename T1, template<typename, size_t> class T2>
+template<typename S, int l, typename T1, template<typename, int> class T2>
 auto operator*(const T1 &x, const Vec<S, l, T2> &y) -> decltype(x * y.data()) {
 	return x * y.data();
 }
 
 /** Divide vector by scalar. */
-template<typename S, size_t l, template<typename, size_t> class T1, typename T2>
+template<typename S, int l, template<typename, int> class T1, typename T2>
 auto operator/(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() * y) {
 	return x.data() / y;
 }
@@ -63,7 +63,7 @@ auto operator/(const Vec<S, l, T1> &x, const T2 &y) -> decltype(x.data() * y) {
  *
  * Classes implementing this abstract interface support value semantics. Overridden methods should be declared final.
  */
-template<typename ScalarT, size_t length, template<typename, size_t> class ImplT>
+template<typename ScalarT, int length, template<typename, int> class ImplT>
 class Vec {
 public:
 	typedef ImplT<ScalarT, length> DataT;
@@ -98,10 +98,10 @@ public:
 	ScalarT& w() { return operator[](3); }
 
 	/** Index operator. */
-	ScalarT& operator[](size_t index) { return m_data[index]; }
+	ScalarT& operator[](int index) { return m_data[index]; }
 
 	/** Const index operator. */
-	ScalarT operator[](size_t index) const { return m_data[index]; }
+	ScalarT operator[](int index) const { return m_data[index]; }
 
 	template <typename T>
 	Vec& operator+=(const T &that) {

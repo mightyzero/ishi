@@ -9,25 +9,25 @@
 namespace ishi {
 
 // Forward declaration
-template <typename ScalarT, size_t length>
+template <typename ScalarT, int length>
 class ArrayVecImpl;
 
 /**
  * Specialization of VecTrait for ArrayVecImpl.
  */
-template <typename ScalarT, size_t length>
+template <typename ScalarT, int length>
 struct VecTrait<ArrayVecImpl<ScalarT, length>> {
 	typedef ScalarT type;
 };
 
 // Forward declaration of friend method swap
-template <typename ScalarT, size_t length>
+template <typename ScalarT, int length>
 void swap(ArrayVecImpl<ScalarT, length> &lhs, ArrayVecImpl<ScalarT, length> &rhs);
 
 /**
  * Addition operator.
  */
-template <typename ScalarT, size_t length>
+template <typename ScalarT, int length>
 ArrayVecImpl<ScalarT, length> operator+(ArrayVecImpl<ScalarT, length> lhs, const ArrayVecImpl<ScalarT, length>& rhs) {
 	lhs += rhs;
 	return lhs;
@@ -36,7 +36,7 @@ ArrayVecImpl<ScalarT, length> operator+(ArrayVecImpl<ScalarT, length> lhs, const
 /**
  * Subtraction operator.
  */
-template<typename ScalarT, size_t length>
+template<typename ScalarT, int length>
 ArrayVecImpl<ScalarT, length> operator-(ArrayVecImpl<ScalarT, length> lhs, const ArrayVecImpl<ScalarT, length>& rhs) {
 	lhs -= rhs;
 	return lhs;
@@ -45,7 +45,7 @@ ArrayVecImpl<ScalarT, length> operator-(ArrayVecImpl<ScalarT, length> lhs, const
 /**
  * Multiplication operator.
  */
-template<typename ScalarT, size_t length>
+template<typename ScalarT, int length>
 ArrayVecImpl<ScalarT, length> operator*(ArrayVecImpl<ScalarT, length> lhs, ScalarT scalar) {
 	lhs *= scalar;
 	return lhs;
@@ -54,7 +54,7 @@ ArrayVecImpl<ScalarT, length> operator*(ArrayVecImpl<ScalarT, length> lhs, Scala
 /**
  * Multiplication operator.
  */
-template<typename ScalarT, size_t length>
+template<typename ScalarT, int length>
 ArrayVecImpl<ScalarT, length> operator*(ScalarT scalar, ArrayVecImpl<ScalarT, length> rhs) {
 	return rhs * scalar;
 }
@@ -62,7 +62,7 @@ ArrayVecImpl<ScalarT, length> operator*(ScalarT scalar, ArrayVecImpl<ScalarT, le
 /**
  * Division operator.
  */
-template<typename ScalarT, size_t length>
+template<typename ScalarT, int length>
 ArrayVecImpl<ScalarT, length> operator/(ArrayVecImpl<ScalarT, length> lhs, ScalarT scale) {
 	lhs /= scale;
 	return lhs;
@@ -71,7 +71,7 @@ ArrayVecImpl<ScalarT, length> operator/(ArrayVecImpl<ScalarT, length> lhs, Scala
 /**
  * Implementation of Vec using std::array as backing data store.
  */
-template <typename ScalarT, size_t length>
+template <typename ScalarT, int length>
 class ArrayVecImpl {
 public:
 	typedef typename VecTrait<ArrayVecImpl>::type value_type;
@@ -116,18 +116,18 @@ public:
 	}
 
 	/** Index operator. */
-	ScalarT &operator[](size_t index) {
+	ScalarT &operator[](int index) {
 		return m_data[index];
 	}
 
 	/** Const version of index operator. */
-	ScalarT operator[](size_t index) const {
+	ScalarT operator[](int index) const {
 		return m_data[index];
 	}
 
 	/** Compound addition operator. */
 	ArrayVecImpl &operator+=(const ArrayVecImpl &that) {
-		for (size_t i = 0; i < length; ++i) {
+		for (int i = 0; i < length; ++i) {
 			m_data[i] += that[i];
 		}
 		return *this;
@@ -135,7 +135,7 @@ public:
 
 	/** Compound subtraction operator. */
 	ArrayVecImpl &operator-=(const ArrayVecImpl &that) {
-		for (size_t i = 0; i < length; ++i) {
+		for (int i = 0; i < length; ++i) {
 			m_data[i] -= that[i];
 		}
 		return *this;
@@ -143,7 +143,7 @@ public:
 
 	/** Compound multiplication operator. */
 	ArrayVecImpl &operator*=(ScalarT scalar) {
-		for (size_t i = 0; i < length; ++i) {
+		for (int i = 0; i < length; ++i) {
 			m_data[i] *= scalar;
 		}
 		return *this;
@@ -151,14 +151,14 @@ public:
 
 	/** Compound division operator. */
 	ArrayVecImpl &operator/=(ScalarT scalar) {
-		for (size_t i = 0; i < length; ++i) {
+		for (int i = 0; i < length; ++i) {
 			m_data[i] /= scalar;
 		}
 		return *this;
 	}
 };
 
-template<typename ScalarT, size_t length>
+template<typename ScalarT, int length>
 using ArrayVec = Vec<ScalarT, length, ArrayVecImpl>;
 
 }  //namespace ishi
