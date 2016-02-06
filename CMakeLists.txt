@@ -78,6 +78,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 add_subdirectory(${LIB_DIR}/GLEW)      # Build GLEW
 add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
+add_subdirectory(${LIB_DIR}/main/blitz)
 
 # Project source files are all cpp files under SRC_DIR.
 # Note: CMake needs to be re-run when a new source file is added.
@@ -88,7 +89,8 @@ file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp")
 #---------------#
 set(MAIN ishi)
 
-include_directories(${INC_DIR})
+include_directories(${INC_DIR} ${LIB_DIR}/main/blitz/include)
+
 add_library(${MAIN} ${SOURCE})
 target_compile_options(${MAIN}
 	PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>"
@@ -105,9 +107,10 @@ file(GLOB_RECURSE TEST_SOURCE "${TEST_SRC_DIR}/*.cpp")
 set(TEST_MAIN ishi_test)
 
 include_directories(
-	${INC_DIR}
-	${TEST_DIR}/include
-	${TEST_LIB_DIR})
+		${INC_DIR}
+		${TEST_LIB_DIR}
+		${TEST_DIR}/include
+		${TEST_LIB_DIR})
 
 add_executable(${TEST_MAIN} ${SOURCE} ${TEST_SOURCE})
 target_compile_options(${TEST_MAIN} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
