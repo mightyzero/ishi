@@ -87,7 +87,7 @@ include_directories(${INC_DIR})
 
 # Project source files are all cpp files under SRC_DIR.
 # Note: CMake needs to be re-run when a new source file is added.
-file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp")
+file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp" "${INC_DIR}/*.h")
 
 add_library(${MAIN} ${SOURCE})
 
