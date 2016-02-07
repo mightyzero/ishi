@@ -52,18 +52,17 @@ set(DO_COVERAGE true)
 if (DO_COVERAGE)
 	message(STATUS "Code coverage is enabled - adding flags")
 
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-	set(CMAKE_EXE_LINKER_FLAGS
-	    "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
+	set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+	set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 endif (DO_COVERAGE)
 
 #--------------------------------#
 # Paths to Important Directories #
 #--------------------------------#
-set(INC_DIR  ${PROJECT_SOURCE_DIR}/src/main/include)
-set(SRC_DIR  ${PROJECT_SOURCE_DIR}/src/main/cpp)
-set(LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
+set(INC_DIR ${PROJECT_SOURCE_DIR}/src/main/include)
+set(SRC_DIR ${PROJECT_SOURCE_DIR}/src/main/cpp)
+set(LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
 
 set(TEST_DIR     ${PROJECT_SOURCE_DIR}/src/test)
 set(TEST_LIB_DIR ${PROJECT_SOURCE_DIR}/lib/test)
@@ -79,25 +78,22 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 add_subdirectory(${LIB_DIR}/GLEW)      # Build GLEW
 add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
 
-# Project source files are all cpp files under SRC_DIR.
-# Note: CMake needs to be re-run when a new source file is added.
-file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp")
-
 #---------------#
 # Build Project #
 #---------------#
 set(MAIN ishi)
 
 include_directories(${INC_DIR})
-add_library(${MAIN} ${SOURCE})
-target_compile_options(${MAIN}
-	PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>"
-)
-target_link_libraries(${MAIN} tga)
 
-# Test source files are all cpp files under SRC_DIR.
-# Note: CMake needs to be re-run when a new test source file is added.
-file(GLOB_RECURSE TEST_SOURCE "${TEST_SRC_DIR}/*.cpp")
+# Project source files are all cpp files under SRC_DIR.
+# Note: CMake needs to be re-run when a new source file is added.
+file(GLOB_RECURSE SOURCE "${SRC_DIR}/*.cpp" "${INC_DIR}/*.h")
+
+add_library(${MAIN} ${SOURCE})
+
+target_compile_options(${MAIN} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
+
+target_link_libraries(${MAIN} tga)
 
 #-------------#
 # Build Tests #
@@ -109,7 +105,12 @@ include_directories(
 	${TEST_DIR}/include
 	${TEST_LIB_DIR})
 
+# Test source files are all cpp files under SRC_DIR.
+# Note: CMake needs to be re-run when a new test source file is added.
+file(GLOB_RECURSE TEST_SOURCE "${TEST_SRC_DIR}/*.cpp")
+
 add_executable(${TEST_MAIN} ${SOURCE} ${TEST_SOURCE})
+
 target_compile_options(${TEST_MAIN} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
 
 enable_testing()
