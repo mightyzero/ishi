@@ -11,6 +11,9 @@
 #==============================================================================#
 cmake_minimum_required(VERSION 2.8.12)
 
+# Do not interpret strings as variables and dereference them
+cmake_policy(SET CMP0054 NEW)
+
 #-----------------#
 # Project Details #
 #-----------------#
@@ -42,7 +45,17 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 
 # Set compilation flags
-set(DEBUG_FLAGS -g -O0 -std=c++11 -Wall -Wunused -Wno-system-headers -Wno-deprecated -Woverloaded-virtual -Wextra)
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  # using Clang
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  # using GCC
+  set(DEBUG_FLAGS -g -O0 -std=c++11 -Wall -Wunused -Wno-system-headers -Wno-deprecated -Woverloaded-virtual -Wextra)
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+  # using Intel C++
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+  # using Visual Studio C++
+  set(DEBUG_FLAGS -Zi -Od -W4 -WX)
+endif()
 
 #------------------------------------------------------------------------------#
 # Configure Code Coverage Options                                              #
@@ -57,19 +70,11 @@ if (DO_COVERAGE)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 endif (DO_COVERAGE)
 
-#--------------------------------#
-# Paths to Important Directories #
-#--------------------------------#
-set(INC_DIR ${PROJECT_SOURCE_DIR}/include)
-set(SRC_DIR ${PROJECT_SOURCE_DIR}/src)
-set(LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
-
-set(TEST_LIB_DIR ${PROJECT_SOURCE_DIR}/lib/test)
-set(TEST_SRC_DIR ${PROJECT_SOURCE_DIR}/test)
-
 #--------------------#
 # Build Dependencies #
 #--------------------#
+set(LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # set(BUILD_SHARED_LIBS False)
@@ -80,6 +85,9 @@ add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
 #---------------#
 # Build Project #
 #---------------#
+set(INC_DIR ${PROJECT_SOURCE_DIR}/include)
+set(SRC_DIR ${PROJECT_SOURCE_DIR}/src)
+
 set(MAIN ishi)
 
 include_directories(${INC_DIR})
@@ -97,6 +105,9 @@ target_link_libraries(${MAIN} tga)
 #-------------#
 # Build Tests #
 #-------------#
+set(TEST_LIB_DIR ${PROJECT_SOURCE_DIR}/lib/test)
+set(TEST_SRC_DIR ${PROJECT_SOURCE_DIR}/test)
+
 set(TEST_MAIN ishi_test)
 
 include_directories(
