@@ -39,9 +39,9 @@ void* FixedAllocator::allocate() {
 		ASSERT(m_allocChunk->numFreeBlocks > 0);  // Available space check
 		return m_allocChunk->alloc(m_blockSize);
 	}
-	
+	return nullptr;
 }
 
-void FixedAllocator::deallocate(void *addr) {
+void FixedAllocator::deallocate(void *) {
 	// D
 }

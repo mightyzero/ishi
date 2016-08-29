@@ -70,18 +70,6 @@ if (DO_COVERAGE)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 endif (DO_COVERAGE)
 
-#--------------------#
-# Build Dependencies #
-#--------------------#
-set(LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-
-# set(BUILD_SHARED_LIBS False)
-
-add_subdirectory(${LIB_DIR}/GLEW)      # Build GLEW
-add_subdirectory(${LIB_DIR}/libtga)    # Build libTGA
-
 #---------------#
 # Build Project #
 #---------------#
@@ -100,19 +88,17 @@ add_library(${MAIN} ${SOURCE})
 
 target_compile_options(${MAIN} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
 
-target_link_libraries(${MAIN} tga)
-
 #-------------#
 # Build Tests #
 #-------------#
-set(TEST_LIB_DIR ${PROJECT_SOURCE_DIR}/lib/test)
+set(EXT_PROJECTS_DIR "ext")
 set(TEST_SRC_DIR ${PROJECT_SOURCE_DIR}/test)
 
 set(TEST_MAIN ishi_test)
 
-include_directories(
-	${INC_DIR}
-	${TEST_LIB_DIR})
+# Includes Catch in the project
+add_subdirectory(${EXT_PROJECTS_DIR}/catch)
+include_directories(${INC_DIR} ${CATCH_INCLUDE_DIR})
 
 # Test source files are all cpp files under SRC_DIR.
 # Note: CMake needs to be re-run when a new test source file is added.
@@ -122,7 +108,7 @@ add_executable(${TEST_MAIN} ${SOURCE} ${TEST_SOURCE})
 
 target_compile_options(${TEST_MAIN} PUBLIC "$<$<CONFIG:DEBUG>:${DEBUG_FLAGS}>")
 
-enable_testing()
+enable_testing(true)  # Enables unit-testing.
 add_test(unittest ${TEST_MAIN})
 
 #------------------------#

@@ -11,7 +11,7 @@ void Chunk::init(size_t blockSize, unsigned char numBlocks) {
 	
 	// Write on first byte of every (unused) block: index of next block
 	unsigned char* p = pData;
-	for (unsigned int i = 0; i < numBlocks; p += blockSize) {
+	for (unsigned char i = 0; i < numBlocks; p += blockSize) {
 		*p = ++i;
 	}
 }
@@ -37,10 +37,10 @@ void Chunk::dealloc(void* addr, size_t blockSize) {
 	ASSERT(blockSize > 0);
 	
 	unsigned char *pToFree = static_cast<unsigned char*>(addr);
-	ASSERT((pToFree - pData) % blockSize == 0);  // Alignment check
+	ASSERT((pToFree - pData) % (char) blockSize == 0);  // Alignment check
 
-	firstFreeBlock = (pToFree - pData) / blockSize;
-	ASSERT(firstFreeBlock == (pToFree - pData) / blockSize); // Truncation check
+	firstFreeBlock = (char) (pToFree - pData) / (char) blockSize;
+	ASSERT(firstFreeBlock == (pToFree - pData) / (char) blockSize); // Truncation check
 	
 	++numFreeBlocks;	
 }

@@ -1,7 +1,7 @@
 #ifndef TEST_TESTMATH_H
 #define TEST_TESTMATH_H
 
-#include <catch/catch.hpp>
+#include <catch.hpp>
 #include <core/math.h>
 
 TEST_CASE("sum", "shoudl give correct result") {

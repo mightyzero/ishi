@@ -1,4 +1,4 @@
-#include <catch/catch.hpp>
+#include <catch.hpp>
 #include <core/algebra/impl/array_vec.h>
 
 namespace ishi {
@@ -250,7 +250,7 @@ TEST_CASE("Unit tests for ArrayVec", "[ArrayVec]") {
 	SECTION("Compound multiply by zero should return zero vector") {
 		TestVec actual(1.0f, 2.0f, 3.0f, 4.0f);
 
-		actual *= 0;
+		actual *= 0.f;
 
 		CHECK(actual.x() == 0.0f);
 		CHECK(actual.y() == 0.0f);
@@ -262,7 +262,7 @@ TEST_CASE("Unit tests for ArrayVec", "[ArrayVec]") {
 		TestVec actual(1.0f, 2.0f, 3.0f, 4.0f);
 		TestVec expected = actual;
 
-		actual *= 1;
+		actual *= 1.f;
 
 		CHECK(actual.x() == expected.x());
 		CHECK(actual.y() == expected.y());
@@ -274,7 +274,7 @@ TEST_CASE("Unit tests for ArrayVec", "[ArrayVec]") {
 		TestVec actual(1.0f, 2.0f, 3.0f, 4.0f);
 		TestVec expected(2.0f, 4.0f, 6.0f, 8.0f);
 
-		actual *= 2;
+		actual *= 2.f;
 
 		CHECK(actual.x() == expected.x());
 		CHECK(actual.y() == expected.y());
